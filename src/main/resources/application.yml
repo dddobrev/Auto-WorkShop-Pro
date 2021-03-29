@@ -1,31 +1,31 @@
 logging:
-  level:
-    blog: WARN
-    org: WARN
-    org.hibernate.SQL: DEBUG
+    level:
+        blog: WARN
+        org: WARN
+        org.hibernate.SQL: DEBUG
 spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    password: root
-    url: jdbc:mysql://localhost:3306/auto_workshop_test?createDatabaseIfNotExist=TRUE&serverTimezone=Europe/Sofia
-    username: root
-  jpa:
-    hibernate:
-      ddl-auto: update
-    open-in-view: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDB103Dialect
-        format_sql: true
-        show_sql: true
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
-  servlet:
-    multipart:
-      max-file-size: 1MB
-      max-request-size: 5MB
-  carousel:
-   images: admin.jpg, motul-motors1.jpg, motul-motors-org.jpg
-   refresh-cron: "0 */10 * * * *"
+    carousel:
+        images: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg
+        refresh-cron: 0 */1 * * * *
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        password: root
+        url: jdbc:mysql://localhost:3306/auto_workshop_test?createDatabaseIfNotExist=TRUE&serverTimezone=Europe/Sofia
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+        open-in-view: false
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MariaDB103Dialect
+                format_sql: true
+                show_sql: true
+    mvc:
+        hiddenmethod:
+            filter:
+                enabled: true
+    servlet:
+        multipart:
+            max-file-size: 1MB
+            max-request-size: 5MB
