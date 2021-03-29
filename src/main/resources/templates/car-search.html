@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment::head"></head>
+
+<body>
+
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">Car search</h2>
+        <form th:action="@{/cars/search}"
+              th:object="${carViewModel}"
+              method="POST"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="brand" class="text-white font-weight-bold">Brand</label>
+                    <input name="brand"
+                           th:value="*{brand}"
+                           id="brand" type="text" min="1" max="30" class="form-control"
+                           placeholder="Brand"/>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="model" class="text-white font-weight-bold">Model</label>
+                    <input name="model"
+                           th:value="*{model}"
+                           id="model" type="text" min="1" max="30" class="form-control"
+                           placeholder="Model"/>
+                </div>
+            </div>
+<!--            <div class="row">-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label for="volume" class="text-white font-weight-bold">Engine volume</label>-->
+<!--                    <input name="volume"-->
+<!--                           th:value="*{volume}"-->
+<!--                           id="volume" type="number" class="form-control"-->
+<!--                           placeholder="Engine volume"/>-->
+<!--                </div>-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label for="power" class="text-white font-weight-bold">Engine power</label>-->
+<!--                    <input name="power"-->
+<!--                           th:value="*{power}"-->
+<!--                           id="power" type="number" min="1" class="form-control"-->
+<!--                           placeholder="Engine power"/>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="coupeModel" class="text-white font-weight-bold">Coupe model</label>
+                    <input name="coupeModel"
+                           th:value="*{coupeModel}"
+                           id="coupeModel" type="text" min="1" class="form-control"
+                           placeholder="Brand"/>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="engine" class="text-white font-weight-bold">Engine type</label>
+                    <input name="engine"
+                           th:value="*{engine}"
+                           id="engine" type="text" min="1" max="30" class="form-control"
+                           placeholder="Model"/>
+                </div>
+            </div>
+<!--            <div class="row">-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label class="text-center text-white font-weight-bold" for="fuel">Fuel type</label>-->
+<!--                    <select-->
+<!--                            id="fuel"-->
+<!--                            name="fuel"-->
+<!--                            th:feld="*{fuel}"-->
+<!--                            class="form-control">-->
+<!--                        <option value="">- Select engine type -</option>-->
+<!--                        <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.FuelEnum).values()}"-->
+<!--                                th:text="${f}"-->
+<!--                                th:value="${f}">Fuel-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label class="text-center text-white font-weight-bold" for="transmission">Transmission type</label>-->
+<!--                    <select-->
+<!--                            name="transmission"-->
+<!--                            th:feld="*{transmission}"-->
+<!--                            id="transmission" class="form-control">-->
+<!--                        <option value="">- Select transmission type -</option>-->
+<!--                        <option th:each="transm: ${T(com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum).values()}"-->
+<!--                                th:text="${transm}"-->
+<!--                                th:value="${transm}">-->
+<!--                            Transmission type-->
+<!--                        </option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" for="vin">VIN</label>
+                    <input name="vin"
+                           th:value="*{vin}"
+                           id="vin" type="text" class="form-control"
+                           placeholder="Put vehicle VIN here">
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" for="regNumber">Registration number</label>
+                    <input name="regNumber"
+                           th:value="*{regNumber}"
+                           id="regNumber" type="text" class="form-control"
+                           placeholder="Put vehicle registration number here">
+                </div>
+            </div>
+<!--            <div class="row">-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label for="releaseDate" class="text-white font-weight-bold">Year of manufacturer</label>-->
+<!--                    <input-->
+<!--                            id="releaseDate"-->
+<!--                            name="releaseDate"-->
+<!--                            th:value="*{releaseDate}"-->
+<!--                            th:errorclass="is-invalid"-->
+<!--                            type="date" class="form-control"-->
+<!--                            placeholder="Manufacturing year"/>-->
+<!--                    <small id="releaseDateError"-->
+<!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
+<!--                        Release date cannot be in the future</small>-->
+<!--                </div>-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label for="mileage" class="text-white font-weight-bold">Mileage</label>-->
+<!--                    <input id="mileage"-->
+<!--                           name="mileage"-->
+<!--                           th:value="*{mileage}"-->
+<!--                           th:errorclass="is-invalid"-->
+<!--                           type="number" min="0" step="1"-->
+<!--                           class="form-control" placeholder="Mileage in kilometers"/>-->
+<!--                    <small id="mileageError"-->
+<!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
+<!--                        Mileage are positive number</small>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            // modal for client search and add
+<!--            <div class="row">-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label class="text-white font-weight-bold">Client</label>-->
+<!--                    <input id="clientEntity"-->
+<!--                           name="clientEntity"-->
+<!--                           th:value="*{client}"-->
+<!--                           type="text"-->
+<!--                           class="form-control" placeholder="add client"/>-->
+
+<!--                    &lt;!&ndash; Button to Open the Modal &ndash;&gt;-->
+<!--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">-->
+<!--                        Search client-->
+<!--                    </button>-->
+
+<!--                    &lt;!&ndash; The Modal &ndash;&gt;-->
+<!--                    <div class="modal fade" id="myModal">-->
+<!--                        <div class="modal-dialog">-->
+<!--                            <div class="modal-content">-->
+
+<!--                                &lt;!&ndash; Modal Header &ndash;&gt;-->
+<!--                                <div class="modal-header">-->
+<!--                                    <h4 class="modal-title">Client search</h4>-->
+<!--                                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--                                </div>-->
+
+<!--                                &lt;!&ndash; Modal body &ndash;&gt;-->
+<!--                                <div class="modal-body">-->
+<!--                                    Modal body..-->
+<!--                                    <a href="/clients/search">search</a>-->
+<!--                                </div>-->
+
+<!--                                &lt;!&ndash; Modal footer &ndash;&gt;-->
+<!--                                <div class="modal-footer">-->
+<!--                                    <button type="button" class="btn btn-link btn-info" data-dismiss="modal">Close</button>-->
+<!--                                </div>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <!--        <div class="form-group">-->
+            <!--            <label class="text-white font-weight-bold" for="description">Description</label>-->
+            <!--            <textarea id="description" type="textarea" class="form-control" rows="3"-->
+            <!--                      placeholder="Description"></textarea>-->
+            <!--        </div>-->
+
+            <!--        <div class="form-group">-->
+            <!--            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>-->
+            <!--            <input id="imageUrl" type="url" class="form-control"-->
+            <!--                   placeholder="Put vehicle image URL here">-->
+            <!--        </div>-->
+
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="search"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment::head"></head>
+
+<body>
+
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">Order add</h2>
+        <form th:action="@{/orders/add}"
+              th:object="${orderAddBindingModel}"
+              method="POST"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" for="car">Enter car reg. number</label>
+                    <select
+                            id="car"
+                            name="car"
+                            th:feld="${cars}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- car registration number -</option>
+                        <option th:each="f: ${cars}"
+                                th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
+                                th:value="${f.id}">car
+                        </option>
+                        <small id="carError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            You must select car</small>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="dataIn" class="text-white font-weight-bold">Service date</label>
+                    <input
+                            id="dataIn"
+                            name="dataIn"
+                            th:value="*{dataIn}"
+                            th:errorclass="is-invalid"
+                            type="date" class="form-control"
+                            placeholder="Creation date"/>
+                    <small id="dataInError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        date cannot be in the past</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold"
+                           for="classificationEnum">classification</label>
+                    <select
+                            id="classificationEnum"
+                            name="classificationEnum"
+                            th:feld="*{classificationEnum}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select classification -</option>
+                        <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum).values()}"
+                                th:text="${f}"
+                                th:value="${f}">classification
+                        </option>
+                        <small id="classificationEnumError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            You must select classification</small>
+                    </select>
+                </div>
+
+                <!--                <div class="form-group col-md-6 mb-3">-->
+                <!--                    <label for="dataOrder" class="text-white font-weight-bold">Creation date</label>-->
+                <!--                    <input-->
+                <!--                            id="dataOrder"-->
+                <!--                            name="dataOrder"-->
+                <!--                            th:value="*{dataOrder}"-->
+                <!--                            th:errorclass="is-invalid"-->
+                <!--                            type="date" class="form-control"-->
+                <!--                            placeholder="Creation date"/>-->
+                <!--                    <small id="dataOrderError"-->
+                <!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
+                <!--                        date cannot be in the future</small>-->
+                <!--                </div>-->
+            </div>
+
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="comment">Problem description</label>
+                <textarea id="comment" name="comment" type="textarea" class="form-control" rows="3"
+                          placeholder="comment"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="add"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

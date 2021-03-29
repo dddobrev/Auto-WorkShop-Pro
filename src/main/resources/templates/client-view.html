@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/fragment::head"></head>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h3 class="text-center text-white">Client search result</h3>
+    </div>
+<!--    <div th:unless="${notFound}" class="col-5 bg-dark rounded m-auto">-->
+<!--        &lt;!&ndash;        <h3  class="text-white font-weight-bold">Result from clients search</h3>&ndash;&gt;-->
+<!--        <div th:each="d: ${client}" th:object="${d}" class="text-white font-weight-bold">-->
+<!--            <span th:text="|Name: *{firstName} Second name: *{secondName}  tel: *{telephone}|"></span>-->
+<!--            <a class="ml-3 text-warning" th:href="@{/clients/edit/{id}(id=*{id})}">Edit</a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+    <table class="table text-white">
+        <thead>
+        <tr class="my-main text-white">
+            <th scope="col">#</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Telephone number</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody th:unless="${notFound}"  class="text-white">
+        <tr th:each="cl, iter: ${client}" th:object="${cl}">
+            <th th:text="${iter.index} +1" scope="row">1</th>
+            <td th:text="${cl.firstName}"></td>
+            <td th:text="${cl.secondName}"></td>
+            <td th:text="${cl.telephone}"></td>
+            <td>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/clients/edit/{id}(id=*{id})}">edit</a>
+<!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/search/}">car add</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${notFound}" class="text-white">
+        <h3 class="text-center text-warning mt-5">client not found</h3>
+    </div>
+    <form th:action="@{/clients/search}">
+        <div class="row">
+            <div class="col col-md-4 center">
+                <div class="button-holder d-flex rounded">
+                    <input   type="submit" class="btn btn-secondary" value="new search"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

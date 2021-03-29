@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/fragment::head"></head>
+
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container-fluid text-center">
+        <h4 class="center text-warning">
+            OoooО you don't have access to this page! <br/>
+            Please contact an administrator!
+        </h4>
+        <img src="/images/error-403.jpg" width="650" alt="error-403">
+    </div>
+
+<!--    <a class="img-fluid" href="/"><img alt="error" url=('src/main/resources/static/images/404-error.jpg')></a>-->
+</main>
+<footer th:replace="/fragments/fragment::footer"></footer>
+</body>
+</html>

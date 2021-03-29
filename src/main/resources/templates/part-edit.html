@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment::head"></head>
+
+<body>
+
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">Parts edit</h2>
+        <form th:action="@{/parts/edit/{id}(id=${parts.id})}"
+              th:object="${autoPartBindingModel}"
+              th:method="PATCH"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+<!--            <small th:if="${partExist}" id="partUniqueError"-->
+<!--                   class="text-light form-text bg-danger rounded">Part already exist</small>-->
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold"
+                           for="manufacturer">manufacturer</label>
+                    <select
+                            id="manufacturer"
+                            name="manufacturer"
+                            th:feld="${manufacturer}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select manufacture -</option>
+                        <option th:each="mn: ${manufacturer}"
+                                th:text="${mn.manufacturerName}"
+                                th:value="${mn.id}">manufacture
+                        </option>
+                        <small id="manufacturerError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            You must select manufacturer</small>
+<!--                        <small th:if="${partExist}" id="carUniqueError"-->
+<!--                               class="text-light form-text bg-danger rounded">Parts already exist</small>-->
+                    </select>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold"
+                           for="supplier">Supplier</label>
+                    <select
+                            id="supplier"
+                            name="supplier"
+                            th:feld="${supplier}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select supplier -</option>
+                        <option th:each="sp: ${supplier}"
+                                th:text="${sp.supplierName}"
+                                th:value="${sp.id}">Supplier
+                        </option>
+                        <small id="supplierError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            You must select supplier</small>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="name" class="text-white font-weight-bold">Part name</label>
+                    <input name="name"
+                           th:value="${parts.name}"
+                           th:errorclass="is-invalid"
+                           id="name" type="text" class="form-control"
+                           placeholder="Part name"/>
+                    <small id="nameError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        The part name must be more then 2 characters</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="partNumber" class="text-white font-weight-bold">Part number</label>
+                    <input name="partNumber"
+                           th:value="${parts.partNumber}"
+                           th:errorclass="is-invalid"
+                           id="partNumber" type="text" class="form-control"
+                           placeholder="part number"/>
+                    <small id="partNumberError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Part number must be more then 2 numbers</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="partOeNumber" class="text-white font-weight-bold">Part OE number</label>
+                    <input name="partOeNumber"
+                           th:value="${parts.partOeNumber}"
+                           th:errorclass="is-invalid"
+                           id="partOeNumber" type="text" class="form-control"
+                           placeholder="Part OE number"/>
+                    <small id="partOeNumberError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Part number must be more then 2 numbers</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="priceIn" class="text-white font-weight-bold">Price in</label>
+                    <input name="priceIn"
+                           th:value="${parts.priceIn}"
+                           th:errorclass="is-invalid"
+                           id="priceIn" type="number" step="0.01" class="form-control"
+                           placeholder="price in"/>
+                    <small id="priceInError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        The price must be positive</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="priceOut" class="text-white font-weight-bold">Client price</label>
+                    <input name="priceOut"
+                           th:value="${parts.priceOut}"
+                           th:errorclass="is-invalid"
+                           id="priceOut" type="number" step="0.01" class="form-control"
+                           placeholder="Client price"/>
+                    <small id="priceOutError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        The price must be positive</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="piece" class="text-white font-weight-bold">Part piece</label>
+                    <input name="piece"
+                           th:value="${parts.piece}"
+                           th:errorclass="is-invalid"
+                           id="piece" type="number" min="1" class="form-control"
+                           placeholder="Part piece"/>
+                    <small id="pieceError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        The piece must be positive</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="edit"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

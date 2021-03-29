@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment::head"></head>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">Search for parts</h2>
+        <form
+                th:action="@{/parts/search}"
+                th:object="${partViewModel}"
+                method="POST"
+                class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="partNumber" class="text-white font-weight-bold">Part number</label>
+                    <input name="partNumber"
+                           th:value="*{partNumber}"
+                           id="partNumber" type="text" class="form-control"
+                           placeholder="Part number"/>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="partOeNumber" class="text-white font-weight-bold">Part OE number</label>
+                    <input name="partOeNumber"
+                           th:value="*{partOeNumber}"
+                           id="partOeNumber" type="text" class="form-control"
+                           placeholder="Part OE number"/>
+                </div>
+            </div>
+<!--            <div class="row">-->
+<!--                <div class="form-group col-md-6 mb-3">-->
+<!--                    <label for="telephone" class="text-white font-weight-bold">Telephone number</label>-->
+<!--                    <input name="telephone"-->
+<!--                           th:value="*{telephone}"-->
+<!--                           id="telephone" type="text" class="form-control"-->
+<!--                           placeholder="telephone"/>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="Search"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

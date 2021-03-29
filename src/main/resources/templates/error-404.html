@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/fragment::head"></head>
+
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container-fluid text-center">
+        <h3 class="center text-warning">
+            Oooo we did not find the requested resource! <br/>
+            Please contact an administrator!
+        </h3>
+        <img src="/images/404-error.jpg" width="650" alt="error-404">
+    </div>
+
+<!--    <a class="img-fluid" href="/"><img alt="error" url=('src/main/resources/static/images/404-error.jpg')></a>-->
+</main>
+<footer th:replace="/fragments/fragment::footer"></footer>
+</body>
+</html>

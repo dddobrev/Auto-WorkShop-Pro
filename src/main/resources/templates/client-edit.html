@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment::head"></head>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">add Client</h2>
+        <form
+                th:action="@{/clients/edit/{id}(id=${client.id})}"
+                th:object="${clientAddBindingModel}"
+                th:method="PATCH"
+                class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                    <input name="firstName"
+                           th:value="${client.firstName}"
+                           th:errorclass="is-invalid"
+                           id="firstName" type="text" min="1" max="20" class="form-control"
+                           placeholder="First name"/>
+                    <small id="firstNameError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        First name length must be more than 2 characters</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="secondName" class="text-white font-weight-bold">Second Name</label>
+                    <input name="secondName"
+                           th:value="${client.secondName}"
+                           th:errorclass="is-invalid"
+                           id="secondName" type="text" class="form-control"
+                           placeholder="Second name"/>
+                    <small id="secondNameError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Second name length must be more than 1 characters</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="telephone" class="text-white font-weight-bold">Telephone</label>
+                    <input name="telephone"
+                           th:value="${client.telephone}"
+                           th:errorclass="is-invalid"
+                           id="telephone" type="text" min="4" max="30" class="form-control"
+                           placeholder="telephone"/>
+                    <small id="telephoneError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Telephone length must be more than 4 characters</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="edit"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

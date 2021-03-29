@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment::head"></head>
+
+<body>
+
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">Register User</h2>
+        <form
+                th:action="@{/users/register}"
+                th:object="${registrationBindingModel}"
+                method="POST"
+                class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="username" class="text-white font-weight-bold">Username</label>
+                    <input name="username"
+                           th:value="*{username}"
+                           th:errorclass="is-invalid"
+                           id="username" type="text" min="2" max="20" class="form-control"
+                           placeholder="Username"/>
+                    <small id="usernameError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Username length must be more than 3 characters</small>
+                    <small th:if="${userExistsError}" id="usernameUniqueError"
+                           class="text-light form-text bg-danger rounded">Username already exist</small>
+                    <!--                    <p class="errors alert alert-danger">-->
+                    <!--                        Username is required.-->
+                    <!--                    </p>-->
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="email" class="text-white font-weight-bold">e-mail</label>
+                    <input name="email"
+                           th:value="*{email}"
+                           th:errorclass="is-invalid"
+                           id="email" type="email" min="2" max="20" class="form-control"
+                           placeholder="e-mail"/>
+                    <!--                    <p class="errors alert alert-danger">-->
+                    <!--                        E-mail is required.-->
+                    <!--                    </p>-->
+                    <small id="emailError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Email must be valid</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="firstName" class="text-white font-weight-bold">First Name</label>
+                    <input name="firstName"
+                           th:value="*{firstName}"
+                           th:errorclass="is-invalid"
+                           id="firstName" type="text" min="1" max="20" class="form-control"
+                           placeholder="First name"/>
+<!--                    <p class="errors alert alert-danger" >-->
+<!--                        First name is required.-->
+<!--                    </p>-->
+                    <small id="firstNameError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        First name length must be more than 2 characters</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="lastName" class="text-white font-weight-bold">Last Name</label>
+                    <input name="lastName"
+                           th:value="*{lastName}"
+                           id="lastName" type="text" min="1" max="20" class="form-control"
+                           placeholder="Last name"/>
+<!--                    <p class="errors alert alert-danger">-->
+<!--                        Last name is not required.-->
+<!--                    </p>-->
+
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="password" class="text-white font-weight-bold">Password</label>
+                    <input
+                            name="password"
+                            th:errorclass="is-invalid"
+                           id="password"
+                            type="password"
+                            min="2" max="20" class="form-control"
+                           placeholder="Password"/>
+<!--                    <p class="errors alert alert-danger">-->
+<!--                        Password is required.-->
+<!--                    </p>-->
+                    <small id="passwordError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Password length must be between 5 and 20 characters and passwords should match.
+                    </small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="password" class="text-white font-weight-bold">Confirm password</label>
+                    <input name="confirmPassword"
+                           th:errorclass="is-invalid"
+                           id="confirmPassword" type="password" min="2" max="20" class="form-control"
+                           placeholder="confirmPassword"/>
+<!--                    <p class="errors alert alert-danger">-->
+<!--                        Password is required.-->
+<!--                    </p>-->
+                    <small id="confirmPasswordError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Password length must be between 5 and 20 characters and passwords should match.
+                    </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="Register"/>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

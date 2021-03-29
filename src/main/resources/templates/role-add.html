@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/fragment::head"></div>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<div th:replace="fragments/fragment::navbar"></div>
+<main class="my-main">
+    <div class="container">
+<!--    <div class="row rounded">-->
+<!--            <div class="col-12">-->
+<!--            </div>-->
+<!--        </div>-->
+        <!-- row -->
+        <div class="row tm-mt-big justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12">
+                <div class="bg-transparent tm-block">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3 class="tm-block-title d-inline-block text-white">change user role</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-4 tm-edit-product-row">
+                        <div class="col-xl-7 col-lg-7 col-md-12">
+                            <form th:action="@{/role/add}" method="POST"
+                                  class="tm-edit-product-form" th:object="${names}">
+                                <div class="input-group mb-3" >
+                                    <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label text-white">User</label>
+                                    <select class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" id="username" name="username">
+                                        <option value="" selected>Select user</option>
+                                        <option th:each="n: ${names}"
+                                                th:value="${n.username}"
+                                                th:text="${n.username}">Name</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 text-white">
+                                    <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label text-white">User roles</label>
+                                    <div>
+                                        <input type="radio" id="user" name="role"  value="USER" checked>
+                                        <label class="text-white" for="user">User</label><br/>
+                                        <input type="radio" id="admin" name="role" value="ADMIN">
+                                        <label class="text-white" for="admin">Admin</label><br/>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="ml-auto col-xl-8 col-lg-8 col-md-8 col-sm-7 pl-0">
+                                        <button type="submit" class="btn btn-secondary">change</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+<!--                        <div class="col-xl-4 col-lg-4 col-md-12 mx-auto mb-4">-->
+<!--                            <img src="/imagine/admin.jpg" alt="Exercise picture" width="100%">-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="fragments/fragment::footer"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment::head"></head>
+
+<body>
+
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-warning">Car edit</h2>
+        <form th:action="@{/cars/edit/{id}(id=${car.id})}"
+              th:object="${carAddBindingModel}"
+              th:method="PATCH"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="brand" class="text-white font-weight-bold">Brand</label>
+                    <input name="brand"
+                           th:value="${car.brand}"
+                           th:errorclass="is-invalid"
+                           id="brand" type="text" min="1" max="30" class="form-control"
+                           placeholder="Brand"/>
+                    <small id="brandError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Brand length must be more than 1 characters</small>
+                    <!--                    <small th:if="${carExist}" id="carUniqueError"-->
+                    <!--                           class="text-light form-text bg-danger rounded">Car already exist</small>-->
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="model" class="text-white font-weight-bold">Model</label>
+                    <input name="model"
+                           th:value="${car.model}"
+                           th:errorclass="is-invalid"
+                           id="model" type="text" min="1" max="30" class="form-control"
+                           placeholder="Model"/>
+                    <small id="modelError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Model length must be more than 1 characters</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="volume" class="text-white font-weight-bold">Engine volume</label>
+                    <input name="volume"
+                           th:value="${car.volume}"
+                           th:errorclass="is-invalid"
+                           id="volume" type="number" class="form-control"
+                           placeholder="Engine volume"/>
+                    <small id="volumeError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Engine volume must be positive number</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="power" class="text-white font-weight-bold">Engine power</label>
+                    <input name="power"
+                           th:value="${car.power}"
+                           th:errorclass="is-invalid"
+                           id="power" type="number" min="1" class="form-control"
+                           placeholder="Engine power"/>
+                    <small id="powerError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Engine power must be positive number</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="coupeModel" class="text-white font-weight-bold">Coupe model</label>
+                    <input name="coupeModel"
+                           th:value="${car.coupeModel}"
+                           th:errorclass="is-invalid"
+                           id="coupeModel" type="text" min="1" class="form-control"
+                           placeholder="Brand"/>
+                    <small id="coupeModelError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Coupe model length must be more than 1 characters</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="engine" class="text-white font-weight-bold">Engine type</label>
+                    <input name="engine"
+                           th:value="${car.engine}"
+                           th:errorclass="is-invalid"
+                           id="engine" type="text" min="1" max="30" class="form-control"
+                           placeholder="Model"/>
+                    <small id="engineError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Engine type length must be more than 1 characters</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" for="fuel">Fuel type</label>
+                    <select
+                            id="fuel"
+                            name="fuel"
+                            th:feld="${fuel}"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select engine type -</option>
+                        <option th:each="f: ${fuel}"
+                                th:text="${f}"
+                                th:value="${f}">Fuel
+                        </option>
+                        <small id="fuelError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            You must select fuel</small>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" for="transmission">Transmission type</label>
+                    <select
+                            name="transmission"
+                            th:feld="${transmission}"
+                            th:errorclass="is-invalid"
+                            id="transmission" class="form-control">
+                        <option value="">- Select transmission type -</option>
+                        <option th:each="transm: ${transmission}"
+                                th:text="${transm}"
+                                th:value="${transm.valueOf(transm.name())}">
+                            Transmission type
+                        </option>
+                        <small id="transmissionError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            You must select transmission</small>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" for="vin">VIN</label>
+                    <input name="vin"
+                           th:value="${car.vin}"
+                           th:errorclass="is-invalid"
+                           id="vin" type="text" class="form-control"
+                           placeholder="Put vehicle VIN here">
+                    <small id="vinError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        VIN must be more than 10 characters</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" for="regNumber">Registration number</label>
+                    <input name="regNumber"
+                           th:value="${car.regNumber}"
+                           th:errorclass="is-invalid"
+                           id="regNumber" type="text" class="form-control"
+                           placeholder="Put vehicle registration number here">
+                    <small id="regNumberError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Registration number must be more than 4 characters</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="releaseDate" class="text-white font-weight-bold">Year of manufacture</label>
+                    <input
+                            id="releaseDate"
+                            name="releaseDate"
+                            th:value="${car.releaseDate}"
+                            th:errorclass="is-invalid"
+                            type="date" class="form-control"
+                            placeholder="Manufacturing year"/>
+                    <small id="releaseDateError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Release date cannot be in the future</small>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="mileage" class="text-white font-weight-bold">Mileage</label>
+                    <input id="mileage"
+                           name="mileage"
+                           th:value="${car.mileage}"
+                           th:errorclass="is-invalid"
+                           type="number" min="0" step="1"
+                           class="form-control" placeholder="Mileage in kilometers"/>
+                    <small id="mileageError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Mileage are positive number</small>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" for="transmission">Client</label>
+                    <select
+                            name="clientEntity"
+                            th:feld="${client}"
+
+                            id="client" class="form-control">
+                        <option value="">- Select client -</option>
+                        <option th:each="cl: ${client}"
+                                th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
+                                th:value="${cl.id}">
+                            Client
+                        </option>
+                        <!--            <small id="transmissionError"-->
+                        <!--            th:errorclass="is-invalid"-->
+                        <!--                   class="invalid-feedback text-light form-text bg-danger rounded">-->
+                        <!--                You must select transmission</small>-->
+                    </select>
+                </div>
+
+                // modal for client search and add
+                <!--            <div class="row">-->
+                <!--                <div class="form-group col-md-6 mb-3">-->
+                <!--                    <label class="text-white font-weight-bold">Client</label>-->
+                <!--&lt;!&ndash;                    <input id="clientEntity"&ndash;&gt;-->
+                <!--&lt;!&ndash;                           name="clientEntity"&ndash;&gt;-->
+                <!--&lt;!&ndash;                           th:value="*{clientEntity}"&ndash;&gt;-->
+                <!--&lt;!&ndash;                           type="text"&ndash;&gt;-->
+                <!--&lt;!&ndash;                           class="form-control" placeholder="add client by phone"/>&ndash;&gt;-->
+
+                <!--                    &lt;!&ndash; Button to Open the Modal &ndash;&gt;-->
+                <!--                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">-->
+                <!--                        Search by phone-->
+                <!--                    </button>-->
+
+
+                <!--                    &lt;!&ndash; The Modal &ndash;&gt;-->
+                <!--                    <div class="modal fade" id="myModal">-->
+                <!--                        <div class="modal-dialog">-->
+                <!--                            <div class="modal-content">-->
+                <!--                                &lt;!&ndash; Modal Header &ndash;&gt;-->
+                <!--                                <div class="modal-header">-->
+                <!--                                    <h4 class="modal-title">Client search</h4>-->
+                <!--                                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <!--                                </div>-->
+                <!--                                &lt;!&ndash; Modal body &ndash;&gt;-->
+                <!--                                <div class="modal-body">-->
+                <!--                                    <input id="clientEntity"-->
+                <!--                                           name="clientEntity"-->
+                <!--                                           th:value="*{clientEntity}"-->
+                <!--                                           type="text"-->
+                <!--                                           class="form-control" placeholder="add client by phone"/>-->
+
+                <!--&lt;!&ndash;                                    <a href="/clients/search">search</a>&ndash;&gt;-->
+                <!--                                </div>-->
+
+                <!--                                &lt;!&ndash; Modal footer &ndash;&gt;-->
+                <!--                                <div class="modal-footer">-->
+                <!--                                    <button type="button" class="btn btn-link btn-info" data-dismiss="modal">Close</button>-->
+                <!--                                </div>-->
+
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+
+
+                <!--        <div class="form-group">-->
+                <!--            <label class="text-white font-weight-bold" for="description">Description</label>-->
+                <!--            <textarea id="description" type="textarea" class="form-control" rows="3"-->
+                <!--                      placeholder="Description"></textarea>-->
+                <!--        </div>-->
+
+                <!--        <div class="form-group">-->
+                <!--            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>-->
+                <!--            <input id="imageUrl" type="url" class="form-control"-->
+                <!--                   placeholder="Put vehicle image URL here">-->
+                <!--        </div>-->
+<!--                end modal-->
+
+            </div>
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="add"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

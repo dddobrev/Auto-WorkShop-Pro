@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/fragments/fragment::head"></head>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container">
+        <h3 class="text-center text-white">Order</h3>
+    </div>
+    <table class="table text-white">
+        <thead>
+        <tr class="my-main text-white mt-auto">
+            <th scope="col">#</th>
+            <th scope="col">order data</th>
+            <th scope="col">car brand</th>
+            <th scope="col">car model</th>
+            <th scope="col">eng. volume</th>
+            <th scope="col">fuel</th>
+            <th scope="col">reg. number</th>
+            <th scope="col">classification</th>
+            <th scope="col" class="center">comment</th>
+            <th scope="col" class="text-center">preferred date</th>
+            <th scope="col" class="text-center">data out</th>
+            <th scope="col">user name</th>
+            <th scope="col" class="text-center">progress</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">action</th>
+        </tr>
+        </thead>
+        <tbody th:unless="${notFound}" class="text-white mt-auto">
+        <tr th:each="cl, iter: ${order}" th:object="${cl}">
+            <th th:text="${iter.index} +1" scope="row">1</th>
+            <td th:text="${cl.dataOrder}"></td>
+            <td th:text="${cl.car.brand}"></td>
+            <td th:text="${cl.car.model}"></td>
+            <td th:text="${cl.car.volume}"></td>
+            <td th:text="${cl.car.fuel}"></td>
+            <td th:text="${cl.car.regNumber}"></td>
+            <td th:text="${cl.classificationEnum}" th:class="${cl.classificationEnum}"></td>
+            <td th:text="${cl.comment}"></td>
+            <td th:text="${cl.dataIn}"></td>
+            <td th:text="${cl.dataOut}" class="text-warning"></td>
+            <td th:text="${cl.userEntity.firstName}"></td>
+            <td th:text="${cl.progressEnum}" th:class="${cl.progressEnum}"></td>
+            <td>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"
+                   th:href="@{/orders/update/{id}(id=*{id})}">progress</a>
+                <!--                        <a class="ml-3 text-warning text-center" th:href="@{/order/edit/{id}(id=*{id})}">View</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/orders/search}">
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex rounded-bottom">
+                    <input type="submit" class="btn btn-secondary" value="new search"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</main>
+<footer th:replace="/fragments/fragment::footer"></footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/fragments/fragment::head"></head>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container">
+        <h3 class="text-center text-white">Car search result</h3>
+    </div>
+    <!--    <div th:if="${notFound}" class="text-white">-->
+    <!--        <h3 class="text-center text-white mt-5">client not found</h3>-->
+    <!--    </div>-->
+
+    <table class="table text-white">
+        <thead>
+        <tr class="my-main text-white mt-auto">
+            <th scope="col">#</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">eng. volume</th>
+            <th scope="col">fuel</th>
+            <th scope="col">transm. type</th>
+            <th scope="col">reg. number</th>
+            <th scope="col">manuf. date</th>
+            <th scope="col" class="text-center">km</th>
+            <th scope="col" class="text-center">action</th>
+        </tr>
+        </thead>
+                <tbody class="text-white mt-auto">
+                <tr th:each="cl, iter: ${car}" th:object="${cl}">
+                    <th th:text="${iter.index} +1" scope="row">1</th>
+                    <td th:text="${cl.brand}"></td>
+                    <td th:text="${cl.model}"></td>
+                    <td th:text="|${cl.volume} sm3|"></td>
+                    <td th:text="${cl.fuel}"></td>
+                    <td th:text="${cl.transmission}"></td>d>
+                    <td th:text="${cl.regNumber}"></td>
+                    <td th:text="${cl.releaseDate}"></td>
+                    <td th:text="${cl.mileage}"></td>
+                    <td>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/edit/{id}(id=*{id})}">Edit</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/view/{id}(id=*{id})}">View</a>
+                    </td>
+                </tr>
+                </tbody>
+    </table>
+    <div><h3 th:if="${notFound}" class="text-center text-warning">car not found</h3></div>
+    <form th:action="@{/cars/search}">
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex rounded-bottom">
+                    <input   type="submit" class="btn btn-secondary" value="new search"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+<footer th:replace="/fragments/fragment::footer"></footer>
+</body>
+</html>
