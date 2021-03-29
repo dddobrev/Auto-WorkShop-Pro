@@ -1,5 +1,6 @@
 package com.example.AutoWorkShop.service;
 
+import com.example.AutoWorkShop.domain.entities.CarEntity;
 import com.example.AutoWorkShop.domain.service.CarAddServiceModel;
 import com.example.AutoWorkShop.view.CarViewModel;
 
@@ -27,6 +28,8 @@ public interface CarService {
     String findCarByRegistrationNumber(String car);
 
     CarViewModel findCarById(Long id);
+
+    CarEntity findCarEntityById(Long id);
 
     void updateClient(CarAddServiceModel updatedCar);
 }

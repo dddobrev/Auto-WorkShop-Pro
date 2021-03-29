@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class CarouselServiceImpl implements CarouselService {
-    private Logger LOGGER = LoggerFactory.getLogger(CarouselServiceImpl.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(CarouselServiceImpl.class);
 
     private final List<String> images = new ArrayList<>(List.of("1.jpg","2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"));
 

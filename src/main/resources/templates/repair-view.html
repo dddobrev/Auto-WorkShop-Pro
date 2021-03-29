@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="/fragments/fragment::head"></head>
+<body>
+<header th:replace="fragments/fragment::navbar"></header>
+<main class="my-main">
+    <div class="container">
+        <h3 class="text-center text-white">Repair</h3>
+    </div>
+    <table class="table text-white">
+        <thead>
+        <tr class="my-main text-white mt-auto">
+            <th scope="col">#</th>
+            <th scope="col">repair data</th>
+            <th scope="col">car brand</th>
+            <th scope="col">car model</th>
+            <th scope="col">eng. vol.</th>
+            <th scope="col">fuel</th>
+            <th scope="col" class="center">VIN</th>
+            <th scope="col">reg. number</th>
+            <th scope="col">classification</th>
+            <!--            <th scope="col" class="text-center">preferred date</th>-->
+            <th scope="col" class="text-center">data out</th>
+            <th scope="col">client name</th>
+            <!--            <th scope="col" class="text-center">progress</th>-->
+            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">action</th>
+        </tr>
+        </thead>
+        <tbody class="text-white mt-auto">
+        <tr th:object="${car}">
+            <th text="1" scope="row">1</th>
+            <td th:text="${repair.dataInGarage}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.volume}"></td>
+            <td th:text="${car.fuel}"></td>
+            <td th:text="${car.vin}" class="center"></td>
+            <td th:text="${car.regNumber}"></td>
+            <td th:text="${repair.classificationEnum}" th:class="${repair.classificationEnum}"></td>
+            <!--            <td th:text="${cl.dataIn}"></td>-->
+            <td th:text="${repair.dataOutGarage}" class="text-warning"></td>
+            <td th:text="${car.client.firstName}"></td>
+            <!--            <td th:text="${cl.progressEnum}" th:class="${cl.progressEnum}"></td>-->
+            <td>
+                <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
+                <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
+                <a class="ml-3 text-warning text-center" th:href="@{/cars/view/{id}(id=${car.id})}">car details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-auto">
+        <h5 class="text-center text-white">details</h5>
+    </div>
+
+    <table class="table text-white">
+        <thead>
+        <tr class="my-main text-white mt-auto">
+            <th scope="col">#</th>
+            <th scope="col">repair data</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="my-main text-white mt-auto">
+            <th text="1" scope="row">1</th>
+            <td th:text="${repair.dataInGarage}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <!--    <form th:action="@{/orders/search}">-->
+    <!--        <div class="row">-->
+    <!--            <div class="col col-md-4">-->
+    <!--                <div class="button-holder d-flex rounded-bottom">-->
+    <!--                    <input type="submit" class="btn btn-secondary" value="new search"/>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </form>-->
+
+</main>
+<footer th:replace="/fragments/fragment::footer"></footer>
+</body>
+</html>

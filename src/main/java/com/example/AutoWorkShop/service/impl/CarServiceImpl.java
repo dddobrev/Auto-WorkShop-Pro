@@ -119,6 +119,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public CarEntity findCarEntityById(Long id) {
+        return carRepository
+                .findCarById(id)
+                .orElse(null);
+    }
+
+    @Override
     public void updateClient(CarAddServiceModel updatedCar) {
         CarEntity updatedNewCar = carRepository
                 .findCarById(updatedCar.getId())

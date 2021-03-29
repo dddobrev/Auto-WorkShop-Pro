@@ -1,93 +1,88 @@
-package com.example.AutoWorkShop.domain.entities;
+package com.example.AutoWorkShop.domain.binding;
 
+import com.example.AutoWorkShop.domain.entities.CarEntity;
 import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "repair")
-public class RepairEntity extends BaseEntity {
-
+public class RepairAddBindingModel {
+    private Long id;
     private CarEntity car;
     private Integer oldKm;
     private Integer newKm;
     private LocalDate dataInGarage;
     private LocalDate dataOutGarage;
     private ClassificationEnum classificationEnum;
-    private UserEntity userEntity;
 
-
-    public RepairEntity() {
+    public RepairAddBindingModel() {
     }
 
-    @ManyToOne
+    public Long getId() {
+        return id;
+    }
+
+    @NotNull
     public CarEntity getCar() {
         return car;
     }
 
-    @Column(name = "old_km")
     public Integer getOldKm() {
         return oldKm;
     }
-
-    @Column(name = "new_km")
+    @NotNull
+    @PositiveOrZero
     public Integer getNewKm() {
         return newKm;
     }
 
-    @Column(name = "data_in_garage")
+
     public LocalDate getDataInGarage() {
         return dataInGarage;
     }
 
-    @Column(name = "data_out_garage")
     public LocalDate getDataOutGarage() {
         return dataOutGarage;
     }
 
-    @Enumerated(EnumType.STRING)
+    @NotNull
     public ClassificationEnum getClassificationEnum() {
         return classificationEnum;
     }
 
-    @ManyToOne
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public RepairAddBindingModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
-    public RepairEntity setCar(CarEntity car) {
+    public RepairAddBindingModel setCar(CarEntity car) {
         this.car = car;
         return this;
     }
 
-    public RepairEntity setOldKm(Integer oldKm) {
+    public RepairAddBindingModel setOldKm(Integer oldKm) {
         this.oldKm = oldKm;
         return this;
     }
 
-    public RepairEntity setNewKm(Integer newKm) {
+    public RepairAddBindingModel setNewKm(Integer newKm) {
         this.newKm = newKm;
         return this;
     }
 
-    public RepairEntity setDataInGarage(LocalDate dataInGarage) {
+    public RepairAddBindingModel setDataInGarage(LocalDate dataInGarage) {
         this.dataInGarage = dataInGarage;
         return this;
     }
 
-    public RepairEntity setDataOutGarage(LocalDate dataOutGarage) {
+    public RepairAddBindingModel setDataOutGarage(LocalDate dataOutGarage) {
         this.dataOutGarage = dataOutGarage;
         return this;
     }
 
-    public RepairEntity setClassificationEnum(ClassificationEnum classificationEnum) {
+    public RepairAddBindingModel setClassificationEnum(ClassificationEnum classificationEnum) {
         this.classificationEnum = classificationEnum;
-        return this;
-    }
-
-    public RepairEntity setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
         return this;
     }
 }

@@ -4,6 +4,7 @@ import com.example.AutoWorkShop.domain.binding.OrderAddBindingModel;
 import com.example.AutoWorkShop.domain.service.OrderAddServiceModel;
 import com.example.AutoWorkShop.service.CarService;
 import com.example.AutoWorkShop.service.OrderService;
+import com.example.AutoWorkShop.view.OrderViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
@@ -61,7 +63,7 @@ public class OrderController {
         orderAddServiceModel.setUserEntity(username);
         orderService.inputOrder(orderAddServiceModel);
         System.out.println();
-        return "redirect:/orders/search";
+        return "redirect:/orders/search/user";
     }
 
     @GetMapping("/search")
@@ -83,5 +85,13 @@ public class OrderController {
     public String updateById(@PathVariable Long id) {
         orderService.updateById(id);
         return "redirect:/orders/search";
+    }
+
+    @GetMapping("/search/user")
+    public String viewByUser(Model model, Principal principal) {
+        String username = principal.getName();
+        List<OrderViewModel> userOrders = orderService.findAllOrdersByUsername(username);
+        model.addAttribute("order", userOrders);
+        return "order-view";
     }
 }
