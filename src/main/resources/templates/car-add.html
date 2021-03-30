@@ -112,7 +112,6 @@
                     <label class="text-center text-white font-weight-bold" for="transmission">Transmission type</label>
                     <select
                             name="transmission"
-
                             th:errorclass="is-invalid"
                             id="transmission" class="form-control">
                         <option value="">- Select transmission type -</option>
@@ -190,11 +189,11 @@
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select client -</option>
-                            <option th:each="cl: ${clientEntity}"
-                                    th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
-                                    th:value="${cl.id}"
-                                    th:selected="${cl.id} == *{clientEntity}">client
-                            </option>
+                        <option th:each="cl: ${clientEntity}"
+                                th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
+                                th:value="${cl.id}"
+                                th:selected="${cl.id} == *{clientEntity}">client
+                        </option>
                         <small id="classificationEnumError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
                             You must select classification</small>
@@ -202,51 +201,51 @@
                 </div>
             </div>
             // modal for client search and add
-<!--            <div class="row">-->
-<!--                <div class="form-group col-md-6 mb-3">-->
-<!--                    <label class="text-white font-weight-bold">Client</label>-->
-<!--&lt;!&ndash;                    <input id="clientEntity"&ndash;&gt;-->
-<!--&lt;!&ndash;                           name="clientEntity"&ndash;&gt;-->
-<!--&lt;!&ndash;                           th:value="*{clientEntity}"&ndash;&gt;-->
-<!--&lt;!&ndash;                           type="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                           class="form-control" placeholder="add client by phone"/>&ndash;&gt;-->
+            <!--            <div class="row">-->
+            <!--                <div class="form-group col-md-6 mb-3">-->
+            <!--                    <label class="text-white font-weight-bold">Client</label>-->
+            <!--&lt;!&ndash;                    <input id="clientEntity"&ndash;&gt;-->
+            <!--&lt;!&ndash;                           name="clientEntity"&ndash;&gt;-->
+            <!--&lt;!&ndash;                           th:value="*{clientEntity}"&ndash;&gt;-->
+            <!--&lt;!&ndash;                           type="text"&ndash;&gt;-->
+            <!--&lt;!&ndash;                           class="form-control" placeholder="add client by phone"/>&ndash;&gt;-->
 
-<!--                    &lt;!&ndash; Button to Open the Modal &ndash;&gt;-->
-<!--                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">-->
-<!--                        Search by phone-->
-<!--                    </button>-->
+            <!--                    &lt;!&ndash; Button to Open the Modal &ndash;&gt;-->
+            <!--                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">-->
+            <!--                        Search by phone-->
+            <!--                    </button>-->
 
 
-<!--                    &lt;!&ndash; The Modal &ndash;&gt;-->
-<!--                    <div class="modal fade" id="myModal">-->
-<!--                        <div class="modal-dialog">-->
-<!--                            <div class="modal-content">-->
-<!--                                &lt;!&ndash; Modal Header &ndash;&gt;-->
-<!--                                <div class="modal-header">-->
-<!--                                    <h4 class="modal-title">Client search</h4>-->
-<!--                                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                                </div>-->
-<!--                                &lt;!&ndash; Modal body &ndash;&gt;-->
-<!--                                <div class="modal-body">-->
-<!--                                    <input id="clientEntity"-->
-<!--                                           name="clientEntity"-->
-<!--                                           th:value="*{clientEntity}"-->
-<!--                                           type="text"-->
-<!--                                           class="form-control" placeholder="add client by phone"/>-->
+            <!--                    &lt;!&ndash; The Modal &ndash;&gt;-->
+            <!--                    <div class="modal fade" id="myModal">-->
+            <!--                        <div class="modal-dialog">-->
+            <!--                            <div class="modal-content">-->
+            <!--                                &lt;!&ndash; Modal Header &ndash;&gt;-->
+            <!--                                <div class="modal-header">-->
+            <!--                                    <h4 class="modal-title">Client search</h4>-->
+            <!--                                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            <!--                                </div>-->
+            <!--                                &lt;!&ndash; Modal body &ndash;&gt;-->
+            <!--                                <div class="modal-body">-->
+            <!--                                    <input id="clientEntity"-->
+            <!--                                           name="clientEntity"-->
+            <!--                                           th:value="*{clientEntity}"-->
+            <!--                                           type="text"-->
+            <!--                                           class="form-control" placeholder="add client by phone"/>-->
 
-<!--&lt;!&ndash;                                    <a href="/clients/search">search</a>&ndash;&gt;-->
-<!--                                </div>-->
+            <!--&lt;!&ndash;                                    <a href="/clients/search">search</a>&ndash;&gt;-->
+            <!--                                </div>-->
 
-<!--                                &lt;!&ndash; Modal footer &ndash;&gt;-->
-<!--                                <div class="modal-footer">-->
-<!--                                    <button type="button" class="btn btn-link btn-info" data-dismiss="modal">Close</button>-->
-<!--                                </div>-->
+            <!--                                &lt;!&ndash; Modal footer &ndash;&gt;-->
+            <!--                                <div class="modal-footer">-->
+            <!--                                    <button type="button" class="btn btn-link btn-info" data-dismiss="modal">Close</button>-->
+            <!--                                </div>-->
 
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
             // modal end
 
             <!--        <div class="form-group">-->

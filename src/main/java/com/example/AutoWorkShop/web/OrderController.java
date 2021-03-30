@@ -42,7 +42,7 @@ public class OrderController {
     @GetMapping("/add")
     public String addOrder(Model model){
         model.addAttribute("cars", carService.findAllCars());
-        model.addAttribute("classificationEnum", ClassificationEnum.values());
+//        model.addAttribute("classificationEnum", ClassificationEnum.values());
         return "order-add";
     }
 

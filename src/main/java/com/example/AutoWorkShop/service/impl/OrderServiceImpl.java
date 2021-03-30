@@ -59,15 +59,19 @@ public class OrderServiceImpl implements OrderService {
         UserEntity username = userRepository.
                 findByUsername(orderAddServiceModel.getUserEntity()).
                 orElseThrow(() -> new IllegalArgumentException("Creator " + orderAddServiceModel.getUserEntity() + " could not be found"));
-        CarEntity carEntity = carRepository.findById(Long.parseLong(orderAddServiceModel.getCar())).orElse(null);
-        orderEntity.setUserEntity(username);
-        orderEntity.setCar(carEntity);
-        orderEntity.setDataOrder(now)
-                .setClassificationEnum(orderAddServiceModel.getClassificationEnum())
-                .setProgressEnum(orderAddServiceModel.getProgressEnum())
-                .setComment(orderAddServiceModel.getComment())
-                .setDataIn(orderAddServiceModel.getDataIn());
-        orderRepository.save(orderEntity);
+
+        CarEntity carEntity = carRepository.findById(orderAddServiceModel.getCar().getId()).orElse(null);
+        if (carEntity != null) {
+            orderEntity.setUserEntity(username);
+            orderEntity.setCar(carEntity);
+            orderEntity.setDataOrder(now)
+                    .setClassificationEnum(orderAddServiceModel.getClassificationEnum())
+                    .setProgressEnum(orderAddServiceModel.getProgressEnum())
+                    .setComment(orderAddServiceModel.getComment())
+                    .setDataIn(orderAddServiceModel.getDataIn());
+            orderRepository.save(orderEntity);
+        }
+
     }
 
     @Override
@@ -75,14 +79,14 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository
                 .findAll()
                 .stream()
-                .map(ord-> modelMapper.map(ord, OrderViewModel.class))
+                .map(ord -> modelMapper.map(ord, OrderViewModel.class))
                 .collect(Collectors.toList());
     }
 
     @Override
     public OrderViewModel findById(Long id) {
         return orderRepository.findById(id)
-                .map(ord-> modelMapper.map(ord, OrderViewModel.class))
+                .map(ord -> modelMapper.map(ord, OrderViewModel.class))
                 .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -100,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
     public void updateById(Long id) {
         OrderEntity orderEntity = this.orderRepository.getOne(id);
         String name = orderEntity.getProgressEnum().name();
-        switch (name){
+        switch (name) {
             case "OPEN":
                 orderEntity.setProgressEnum(ProgressEnum.IN_PROGRESS);
                 break;
@@ -108,7 +112,7 @@ public class OrderServiceImpl implements OrderService {
 //                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                 LocalDate now = LocalDate.now();
                 orderEntity.setProgressEnum(ProgressEnum.COMPLETED)
-                .setDataOut((now));
+                        .setDataOut((now));
                 break;
             case "COMPLETED":
                 orderRepository.delete(orderEntity);

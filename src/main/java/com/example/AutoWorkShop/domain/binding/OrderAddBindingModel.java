@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class OrderAddBindingModel {
 
     private LocalDate dataOrder;
-    private String car;
+    private CarEntity car;
     private ClassificationEnum classificationEnum;
     private String comment;
     private LocalDate dataIn;
@@ -28,7 +28,7 @@ public class OrderAddBindingModel {
     }
 
     @NotNull
-    public String getCar() {
+    public CarEntity getCar() {
         return car;
     }
 
@@ -64,7 +64,7 @@ public class OrderAddBindingModel {
         return this;
     }
 
-    public OrderAddBindingModel setCar(String car) {
+    public OrderAddBindingModel setCar(CarEntity car) {
         this.car = car;
         return this;
     }

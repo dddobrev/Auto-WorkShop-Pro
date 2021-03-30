@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class OrderAddServiceModel {
     private LocalDate dataOrder;
-    private String car;
+    private CarEntity car;
     private ClassificationEnum classificationEnum;
     private String comment;
     private LocalDate dataIn;
@@ -24,7 +24,7 @@ public class OrderAddServiceModel {
         return dataOrder;
     }
 
-    public String getCar() {
+    public CarEntity getCar() {
         return car;
     }
 
@@ -57,7 +57,7 @@ public class OrderAddServiceModel {
         return this;
     }
 
-    public OrderAddServiceModel setCar(String car) {
+    public OrderAddServiceModel setCar(CarEntity car) {
         this.car = car;
         return this;
     }
