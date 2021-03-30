@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -76,5 +77,13 @@ public class RepairServiceImpl implements RepairService {
         return repairRepository.findById(id)
                 .map(rep-> modelMapper.map(rep, RepairViewModel.class))
                 .orElse(null);
+    }
+
+    @Override
+    public List<RepairViewModel> findRepairByCarId(Long id) {
+        return repairRepository.findAllByCar_Id(id)
+                .stream()
+                .map(rv-> modelMapper.map(rv, RepairViewModel.class))
+                .collect(Collectors.toList());
     }
 }

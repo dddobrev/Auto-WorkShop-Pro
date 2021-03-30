@@ -12,16 +12,16 @@
         <thead>
         <tr class="my-main text-white mt-auto">
             <th scope="col">#</th>
-            <th scope="col">repair data</th>
+            <th scope="col">release data</th>
             <th scope="col">car brand</th>
             <th scope="col">car model</th>
             <th scope="col">eng. vol.</th>
             <th scope="col">fuel</th>
             <th scope="col" class="center">VIN</th>
             <th scope="col">reg. number</th>
-            <th scope="col">classification</th>
+<!--            <th scope="col">classification</th>-->
             <!--            <th scope="col" class="text-center">preferred date</th>-->
-            <th scope="col" class="text-center">data out</th>
+<!--            <th scope="col" class="text-center">data out</th>-->
             <th scope="col">client name</th>
             <!--            <th scope="col" class="text-center">progress</th>-->
             <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">action</th>
@@ -30,21 +30,17 @@
         <tbody class="text-white mt-auto">
         <tr th:object="${car}">
             <th text="1" scope="row">1</th>
-            <td th:text="${repair.dataInGarage}"></td>
+            <td th:text="${car.releaseDate}"></td>
             <td th:text="${car.brand}"></td>
             <td th:text="${car.model}"></td>
             <td th:text="${car.volume}"></td>
             <td th:text="${car.fuel}"></td>
             <td th:text="${car.vin}" class="center"></td>
             <td th:text="${car.regNumber}"></td>
-            <td th:text="${repair.classificationEnum}" th:class="${repair.classificationEnum}"></td>
-            <!--            <td th:text="${cl.dataIn}"></td>-->
-            <td th:text="${repair.dataOutGarage}" class="text-warning"></td>
-            <td th:text="${car.client.firstName}"></td>
-            <!--            <td th:text="${cl.progressEnum}" th:class="${cl.progressEnum}"></td>-->
+            <td th:text="${car.clientEntity.firstName}"></td>
             <td>
-                <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
-                <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"
+                                   th:href="@{/repairs/add/{id}(id=*{id})}">add repair</a>
                 <a class="ml-3 text-warning text-center" th:href="@{/cars/view/{id}(id=${car.id})}">car details</a>
             </td>
         </tr>
@@ -62,15 +58,22 @@
             <th scope="col">repair data</th>
             <th scope="col">km</th>
             <th scope="col">classification</th>
+            <th scope="col">data out</th>
+            <th scope="col">action</th>
         </tr>
         </thead>
         <tbody>
         <tr class="my-main text-white mt-auto"
-            th:object="${repair}" >
-            <th th:text="1" scope="row">1</th>
+            th:each="rep, iter: ${repairs}" th:object="${rep}" >
+            <th th:text="${iter.index} + 1" scope="row">1</th>
             <td th:text="*{dataInGarage}"></td>
             <td th:text="*{newKm}"></td>
             <td th:text="*{classificationEnum}" th:class="*{classificationEnum}"></td>
+            <td th:text="*{dataOutGarage}"></td>
+            <td >
+                <a sec:authorize="hasRole('ROLE_ADMIN')"
+                   class="ml-3 text-warning text-center" th:href="@{/repairs/car/{id}(id=${id})}">Repair</a>
+            </td>
         </tr>
         </tbody>
     </table>

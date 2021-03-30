@@ -48,9 +48,11 @@
                     <td th:text="${cl.releaseDate}"></td>
                     <td th:text="${cl.mileage}"></td>
                     <td th:if="${notClient}" th:text="${cl.clientEntity.firstName}"></td>
-                    <td>
+<!--                    <td sec:authorize="hasRole('ROLE_ADMIN')"-->
+<!--                        class="ml-3 text-warning text-center" th:href="@{/repairs/car/{id}(id=${cl.id})/details/all}"></td>-->
+                    <td >
                         <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/edit/{id}(id=*{id})}">Edit</a>
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/repairs/{id}(id=*{id})}">Repair</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/repairs/car/details/all/{id}(id=${id})}">Repair</a>
                     </td>
                 </tr>
                 </tbody>

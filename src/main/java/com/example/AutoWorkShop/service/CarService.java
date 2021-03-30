@@ -3,6 +3,7 @@ package com.example.AutoWorkShop.service;
 import com.example.AutoWorkShop.domain.entities.CarEntity;
 import com.example.AutoWorkShop.domain.service.CarAddServiceModel;
 import com.example.AutoWorkShop.view.CarViewModel;
+import com.example.AutoWorkShop.view.CarViewModelWithRepairs;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public interface CarService {
     String findCarByRegistrationNumber(String car);
 
     CarViewModel findCarById(Long id);
+
+    CarViewModelWithRepairs findCarWithRepairsById(Long id);
 
     CarEntity findCarEntityById(Long id);
 

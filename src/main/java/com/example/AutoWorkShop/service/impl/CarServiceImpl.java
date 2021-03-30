@@ -8,6 +8,7 @@ import com.example.AutoWorkShop.repository.CarRepository;
 import com.example.AutoWorkShop.repository.UserRepository;
 import com.example.AutoWorkShop.service.CarService;
 import com.example.AutoWorkShop.view.CarViewModel;
+import com.example.AutoWorkShop.view.CarViewModelWithRepairs;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -115,6 +116,14 @@ public class CarServiceImpl implements CarService {
         return carRepository
                 .findCarById(id)
                 .map(car -> modelMapper.map(car, CarViewModel.class))
+                .orElse(null);
+    }
+
+    @Override
+    public CarViewModelWithRepairs findCarWithRepairsById(Long id) {
+        return carRepository
+                .findCarById(id)
+                .map(car -> modelMapper.map(car, CarViewModelWithRepairs.class))
                 .orElse(null);
     }
 

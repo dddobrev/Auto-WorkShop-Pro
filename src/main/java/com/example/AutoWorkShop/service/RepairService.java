@@ -15,4 +15,5 @@ public interface RepairService {
     Long inputRepair(RepairAddServiceModel newRepair);
 
     RepairViewModel findById(Long id);
+    List<RepairViewModel> findRepairByCarId(Long id);
 }
