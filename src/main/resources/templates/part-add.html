@@ -23,13 +23,13 @@
                     <select
                             id="manufacturer"
                             name="manufacturer"
-                            th:feld="${manufacturer}"
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select manufacture -</option>
                         <option th:each="mn: ${manufacturer}"
                                 th:text="${mn.manufacturerName}"
-                                th:value="${mn.id}">manufacture
+                                th:value="${mn.id}"
+                                th:selected="${mn.id} == *{manufacturer}">manufacture
                         </option>
                         <small id="manufacturerError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
@@ -44,13 +44,13 @@
                     <select
                             id="supplier"
                             name="supplier"
-                            th:feld="${supplier}"
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select supplier -</option>
                         <option th:each="sp: ${supplier}"
                                 th:text="${sp.supplierName}"
-                                th:value="${sp.id}">Supplier
+                                th:value="${sp.id}"
+                                th:selected="${sp.id} == ${supplier}">Supplier
                         </option>
                         <small id="supplierError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
@@ -130,84 +130,6 @@
                         The piece must be positive</small>
                 </div>
             </div>
-            <!--                do tuk-->
-            <!--                -->
-            <!--            </div>-->
-            <!--            <div class="row">-->
-            <!--                <div class="form-group col-md-6 mb-3">-->
-            <!--                    <label class="text-white font-weight-bold" for="vin">VIN</label>-->
-            <!--                    <input name="vin"-->
-            <!--                           th:value="*{vin}"-->
-            <!--                           th:errorclass="is-invalid"-->
-            <!--                           id="vin" type="text" class="form-control"-->
-            <!--                           placeholder="Put vehicle VIN here">-->
-            <!--                    <small id="vinError"-->
-            <!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
-            <!--                        VIN must be more than 10 characters</small>-->
-            <!--                </div>-->
-            <!--                <div class="form-group col-md-6 mb-3">-->
-            <!--                    <label class="text-white font-weight-bold" for="regNumber">Registration number</label>-->
-            <!--                    <input name="regNumber"-->
-            <!--                           th:value="*{regNumber}"-->
-            <!--                           th:errorclass="is-invalid"-->
-            <!--                           id="regNumber" type="text" class="form-control"-->
-            <!--                           placeholder="Put vehicle registration number here">-->
-            <!--                    <small id="regNumberError"-->
-            <!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
-            <!--                        Registration number must be more than 4 characters</small>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--            <div class="row">-->
-            <!--                <div class="form-group col-md-6 mb-3">-->
-            <!--                    <label for="releaseDate" class="text-white font-weight-bold">Year of manufacturer</label>-->
-            <!--                    <input-->
-            <!--                            id="releaseDate"-->
-            <!--                            name="releaseDate"-->
-            <!--                            th:value="*{releaseDate}"-->
-            <!--                            th:errorclass="is-invalid"-->
-            <!--                            type="date" class="form-control"-->
-            <!--                            placeholder="Manufacturing year"/>-->
-            <!--                    <small id="releaseDateError"-->
-            <!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
-            <!--                        Release date cannot be in the future</small>-->
-            <!--                </div>-->
-            <!--                <div class="form-group col-md-6 mb-3">-->
-            <!--                    <label for="mileage" class="text-white font-weight-bold">Mileage</label>-->
-            <!--                    <input id="mileage"-->
-            <!--                           name="mileage"-->
-            <!--                           th:value="*{mileage}"-->
-            <!--                           th:errorclass="is-invalid"-->
-            <!--                           type="number" min="0" step="1"-->
-            <!--                           class="form-control" placeholder="Mileage in kilometers"/>-->
-            <!--                    <small id="mileageError"-->
-            <!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
-            <!--                        Mileage are positive number</small>-->
-            <!--                </div>-->
-            <!--            </div>-->
-
-            <!--            <div class="row">-->
-            <!--                <div class="form-group col-md-6 mb-3">-->
-            <!--                    <label class="text-center text-white font-weight-bold"-->
-            <!--                           for="clientEntity">Client</label>-->
-            <!--                    <select-->
-            <!--                            id="clientEntity"-->
-            <!--                            name="clientEntity"-->
-            <!--                            th:feld="${client}"-->
-            <!--                            th:errorclass="is-invalid"-->
-            <!--                            class="form-control">-->
-            <!--                        <option value="">- Select client -</option>-->
-            <!--                        <option th:each="cl: ${client}"-->
-            <!--                                th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"-->
-            <!--                                th:value="${cl.id}">client-->
-            <!--                        </option>-->
-            <!--                        <small id="classificationEnumError"-->
-            <!--                               class="invalid-feedback text-light form-text bg-danger rounded">-->
-            <!--                            You must select classification</small>-->
-            <!--                    </select>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--                -->
-            <!--            do tuk-->
 
             <div class="row">
                 <div class="col col-md-4">

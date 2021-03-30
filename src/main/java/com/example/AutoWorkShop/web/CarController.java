@@ -40,7 +40,7 @@ public class CarController {
 
     @GetMapping("/add")
     public String addCar(Model model) {
-        model.addAttribute("client", clientService.findAll());
+        model.addAttribute("clientEntity", clientService.findAll());
         model.addAttribute("transmission", TransmissionEnum.values());
         model.addAttribute("fuel", FuelEnum.values());
         return "car-add";

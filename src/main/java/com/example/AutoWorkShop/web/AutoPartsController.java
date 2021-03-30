@@ -80,17 +80,21 @@ public class AutoPartsController {
     public String searchPartPost(Model model, String partNumber, String partOeNumber) {
 
 
-        if (!partNumber.isEmpty() && partOeNumber.isEmpty()) {
-            if (autoPartService.findAutoPartByNumber(partNumber).getPartOeNumber().isEmpty()){
-                model.addAttribute("notOEN",true);
+        if (!partNumber.isBlank() && partOeNumber.isBlank()) {
+            if (autoPartService.findAutoPartByNumber(partNumber).getPartOeNumber().isEmpty()) {
+                model.addAttribute("notOEN", true);
             }
-            model.addAttribute("parts", autoPartService.findAutoPartByNumber(partNumber));
-        } else if (partNumber.isEmpty() && !partOeNumber.isEmpty()) {
-            if (autoPartService.findAutoPartByOeNumber(partOeNumber).isEmpty()){
+            AutoPartsViewModel autoPartByNumber = autoPartService.findAutoPartByNumber(partNumber);
+            if (autoPartByNumber != null) {
+                model.addAttribute("parts", autoPartByNumber);
+                model.addAttribute("notFound", false);
+            }
+        } else if (partNumber.isBlank() && !partOeNumber.isBlank()) {
+            if (autoPartService.findAutoPartByOeNumber(partOeNumber).isEmpty()) {
                 model.addAttribute("notOEN", true);
             }
             model.addAttribute("parts", autoPartService.findAutoPartByOeNumber(partOeNumber));
-        } else if (!partNumber.isBlank() && !partOeNumber.isBlank()) {
+        } else if (partNumber.isBlank() && partOeNumber.isBlank()) {
             model.addAttribute("emptyFeeds", true);
         }
 
@@ -110,11 +114,12 @@ public class AutoPartsController {
         model.addAttribute("supplier", supplierService.findAll());
         return "part-edit";
     }
+
     @PatchMapping("/edit/{id}")
     public String updatePartPach(@PathVariable Long id,
                                  @Valid AutoPartBindingModel autoPartBindingModel,
                                  BindingResult bindingResult,
-                                 RedirectAttributes redirectAttributes){
+                                 RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("autoPartBindingModel", autoPartBindingModel);
             redirectAttributes.addFlashAttribute(

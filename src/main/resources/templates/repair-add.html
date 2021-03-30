@@ -27,7 +27,8 @@
                         <option value="">- car selection -</option>
                         <option th:each="f: ${cars}"
                                 th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
-                                th:value="${f.id}">car
+                                th:value="${f.id}"
+                                >car
                         </option>
                         <small id="carError"
                                class="invalid-feedback text-light form-text bg-danger rounded">

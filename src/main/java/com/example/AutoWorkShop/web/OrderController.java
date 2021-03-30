@@ -1,6 +1,7 @@
 package com.example.AutoWorkShop.web;
 
 import com.example.AutoWorkShop.domain.binding.OrderAddBindingModel;
+import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 import com.example.AutoWorkShop.domain.service.OrderAddServiceModel;
 import com.example.AutoWorkShop.service.CarService;
 import com.example.AutoWorkShop.service.OrderService;
@@ -41,6 +42,7 @@ public class OrderController {
     @GetMapping("/add")
     public String addOrder(Model model){
         model.addAttribute("cars", carService.findAllCars());
+        model.addAttribute("classificationEnum", ClassificationEnum.values());
         return "order-add";
     }
 

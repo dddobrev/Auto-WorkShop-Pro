@@ -94,6 +94,7 @@ public class CarAddBindingModel {
         return releaseDate;
     }
 
+    @NotNull
     public ClientEntity getClientEntity() {
         return clientEntity;
     }

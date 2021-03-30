@@ -94,13 +94,14 @@
                     <select
                             id="fuel"
                             name="fuel"
-                            th:feld="*{fuel}"
+
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select engine type -</option>
                         <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.FuelEnum).values()}"
                                 th:text="${f}"
-                                th:value="${f}">Fuel
+                                th:value="${f}"
+                                th:selected="${f} == *{fuel}">Fuel
                         </option>
                         <small id="fuelError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
@@ -111,13 +112,14 @@
                     <label class="text-center text-white font-weight-bold" for="transmission">Transmission type</label>
                     <select
                             name="transmission"
-                            th:feld="*{transmission}"
+
                             th:errorclass="is-invalid"
                             id="transmission" class="form-control">
                         <option value="">- Select transmission type -</option>
                         <option th:each="transm: ${T(com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum).values()}"
                                 th:text="${transm}"
-                                th:value="${transm}">
+                                th:value="${transm}"
+                                th:selected="${transm} == *{transmission}">
                             Transmission type
                         </option>
                         <small id="transmissionError"
@@ -185,14 +187,14 @@
                     <select
                             id="clientEntity"
                             name="clientEntity"
-                            th:feld="${client}"
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select client -</option>
-                        <option th:each="cl: ${client}"
-                                th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
-                                th:value="${cl.id}">client
-                        </option>
+                            <option th:each="cl: ${clientEntity}"
+                                    th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
+                                    th:value="${cl.id}"
+                                    th:selected="${cl.id} == *{clientEntity}">client
+                            </option>
                         <small id="classificationEnumError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
                             You must select classification</small>

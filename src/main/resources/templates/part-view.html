@@ -18,7 +18,7 @@
             <th scope="col">#</th>
             <th scope="col">manufacturer</th>
             <th scope="col">name</th>
-            <th scope="col">part number</th>
+            <th th:unless="${notOEN}" scope="col">part number</th>
             <th th:unless="${notOEN}" scope="col">part OE number</th>
             <th scope="col">price lv</th>
             <th scope="col">action</th>
@@ -31,7 +31,7 @@
             <th th:text="${iter.index} +1" scope="row">1</th>
             <td th:text="${cl.manufacturer.manufacturerName}"></td>
             <td th:text="${cl.name}"></td>
-            <td th:text="${cl.partNumber}"></td>
+            <td th:unless="${notOEN}" th:text="${cl.partNumber}"></td>
             <td th:unless="${notOEN}" th:text="${cl.partOeNumber}"></td>
             <td th:text="${cl.priceOut}"></td>
             <td>

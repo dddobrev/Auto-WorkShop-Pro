@@ -27,7 +27,8 @@
                         <option value="">- car registration number -</option>
                         <option th:each="f: ${cars}"
                                 th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
-                                th:value="${f.id}">car
+                                th:value="${f.id}"
+                                th:selected="${f.id} == *{car}">car
                         </option>
                         <small id="carError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
@@ -61,7 +62,9 @@
                         <option value="">- Select classification -</option>
                         <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum).values()}"
                                 th:text="${f}"
-                                th:value="${f}">classification
+                                th:value="${f}"
+                                th:selected="${classificationEnum} == *{classificationEnum}">classification
+
                         </option>
                         <small id="classificationEnumError"
                                class="invalid-feedback text-light form-text bg-danger rounded">

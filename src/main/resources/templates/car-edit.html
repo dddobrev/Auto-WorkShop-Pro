@@ -94,13 +94,14 @@
                     <select
                             id="fuel"
                             name="fuel"
-                            th:feld="${fuel}"
+
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select engine type -</option>
-                        <option th:each="f: ${fuel}"
+                        <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.FuelEnum).values()}"
                                 th:text="${f}"
-                                th:value="${f}">Fuel
+                                th:value="${f}"
+                                th:selected="${f} == *{fuel}">Fuel
                         </option>
                         <small id="fuelError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
@@ -111,13 +112,14 @@
                     <label class="text-center text-white font-weight-bold" for="transmission">Transmission type</label>
                     <select
                             name="transmission"
-                            th:feld="${transmission}"
+
                             th:errorclass="is-invalid"
                             id="transmission" class="form-control">
                         <option value="">- Select transmission type -</option>
-                        <option th:each="transm: ${transmission}"
+                        <option th:each="transm: ${T(com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum).values()}"
                                 th:text="${transm}"
-                                th:value="${transm.valueOf(transm.name())}">
+                                th:value="${transm}"
+                                th:selected="${transm} == *{transmission}">
                             Transmission type
                         </option>
                         <small id="transmissionError"
@@ -184,15 +186,16 @@
                     <label class="text-center text-white font-weight-bold" for="transmission">Client</label>
                     <select
                             name="clientEntity"
-                            th:feld="${client}"
 
                             id="client" class="form-control">
                         <option value="">- Select client -</option>
                         <option th:each="cl: ${client}"
                                 th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
-                                th:value="${cl.id}">
+                                th:value="${cl.id}"
+                                th:selected="${cl.id} == *{clientEntity}">
                             Client
                         </option>
+
                         <!--            <small id="transmissionError"-->
                         <!--            th:errorclass="is-invalid"-->
                         <!--                   class="invalid-feedback text-light form-text bg-danger rounded">-->
@@ -259,7 +262,7 @@
                 <!--            <input id="imageUrl" type="url" class="form-control"-->
                 <!--                   placeholder="Put vehicle image URL here">-->
                 <!--        </div>-->
-<!--                end modal-->
+                <!--                end modal-->
 
             </div>
             <div class="row">
