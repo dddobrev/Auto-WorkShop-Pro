@@ -69,4 +69,5 @@ public class RepairDetailsAddServiceModel {
         this.autoParts = autoParts;
         return this;
     }
+
 }

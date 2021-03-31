@@ -7,13 +7,15 @@ import com.example.AutoWorkShop.view.RepairViewModel;
 import java.util.List;
 
 public interface RepairService {
-    List<RepairEntity> findOrderByCarName(String carName);
-    List<RepairEntity> findOrderByCarVin(String carVin);
-    List<RepairEntity> findOrderByCarRegNumber(String carRegNumber);
-    List<RepairEntity> findAllByCarVin(String carVin);
+    List<RepairViewModel> findOrderByCarName(String carName);
+
+    List<RepairViewModel> findOrderByCarVin(String carVin);
+
+    List<RepairViewModel> findOrderByCarRegNumber(String carRegNumber);
 
     Long inputRepair(RepairAddServiceModel newRepair);
 
     RepairViewModel findById(Long id);
+
     List<RepairViewModel> findRepairByCarId(Long id);
 }

@@ -3,6 +3,7 @@ package com.example.AutoWorkShop.domain.binding;
 import com.example.AutoWorkShop.domain.entities.AutoPartEntity;
 import com.example.AutoWorkShop.domain.entities.RepairEntity;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,7 +24,6 @@ public class RepairDetailsAddBindingModel {
         return id;
     }
 
-    @NotNull
     public RepairEntity getRepair() {
         return repair;
     }
@@ -38,6 +38,7 @@ public class RepairDetailsAddBindingModel {
         return remarks;
     }
 
+    @DecimalMin("0")
     public BigDecimal getPrice() {
         return price;
     }

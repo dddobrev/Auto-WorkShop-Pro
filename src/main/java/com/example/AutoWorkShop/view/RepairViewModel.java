@@ -1,9 +1,12 @@
 package com.example.AutoWorkShop.view;
 
 import com.example.AutoWorkShop.domain.entities.CarEntity;
+import com.example.AutoWorkShop.domain.entities.RepairDetail;
 import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RepairViewModel {
     private Long id;
@@ -11,6 +14,7 @@ public class RepairViewModel {
     private Integer newKm;
     private LocalDate dataInGarage;
     private LocalDate dataOutGarage;
+    private List<RepairDetail> repairDetails = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -42,6 +46,10 @@ public class RepairViewModel {
         return classificationEnum;
     }
 
+    public List<RepairDetail> getRepairDetails() {
+        return repairDetails;
+    }
+
     public RepairViewModel setId(Long id) {
         this.id = id;
         return this;
@@ -71,4 +79,5 @@ public class RepairViewModel {
         this.classificationEnum = classificationEnum;
         return this;
     }
+
 }

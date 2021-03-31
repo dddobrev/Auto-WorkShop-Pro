@@ -14,7 +14,7 @@ public class AutoPartEntity extends BaseEntity{
     private String partOeNumber;
     private BigDecimal priceIn;
     private BigDecimal priceOut;
-    private Set<RepairDetail> repairDetail;
+//    private Set<RepairDetail> repairDetail;
     private Integer piece;
 //    private Set<WarehouseEntity> warehouses;
 
@@ -56,10 +56,10 @@ public class AutoPartEntity extends BaseEntity{
         return priceOut;
     }
 
-    @OneToMany
-    public Set<RepairDetail> getRepairDetail() {
-        return repairDetail;
-    }
+//    @OneToMany
+//    public Set<RepairDetail> getRepairDetail() {
+//        return repairDetail;
+//    }
 
     @Column(name = "pieces")
     public Integer getPiece() {
@@ -106,10 +106,10 @@ public class AutoPartEntity extends BaseEntity{
         return this;
     }
 
-    public AutoPartEntity setRepairDetail(Set<RepairDetail> repairDetail) {
-        this.repairDetail = repairDetail;
-        return this;
-    }
+//    public AutoPartEntity setRepairDetail(Set<RepairDetail> repairDetail) {
+//        this.repairDetail = repairDetail;
+//        return this;
+//    }
 
     public AutoPartEntity setPiece(Integer piece) {
         this.piece = piece;

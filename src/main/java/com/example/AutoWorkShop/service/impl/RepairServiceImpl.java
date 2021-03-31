@@ -34,23 +34,30 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public List<RepairEntity> findOrderByCarName(String carName) {
-        return this.repairRepository.findRepairByCarBrand(carName);
+    public List<RepairViewModel> findOrderByCarName(String carName) {
+        return this.repairRepository
+                .findRepairByCarBrand(carName)
+                .stream()
+                .map(rep -> modelMapper.map(rep, RepairViewModel.class))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<RepairEntity> findOrderByCarVin(String carVin) {
-        return this.repairRepository.findRepairByCarVin(carVin);
+    public List<RepairViewModel> findOrderByCarVin(String carVin) {
+        return this.repairRepository
+                .findRepairByCarVin(carVin)
+                .stream()
+                .map(rep -> modelMapper.map(rep, RepairViewModel.class))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<RepairEntity> findOrderByCarRegNumber(String carRegNumber) {
-        return this.repairRepository.findRepairByCar_RegNumber(carRegNumber);
-    }
-
-    @Override
-    public List<RepairEntity> findAllByCarVin(String carVin) {
-        return this.repairRepository.findAllByCar_Vin(carVin);
+    public List<RepairViewModel> findOrderByCarRegNumber(String carRegNumber) {
+        return this.repairRepository
+                .findRepairByCar_RegNumber(carRegNumber)
+                .stream()
+                .map(rep -> modelMapper.map(rep, RepairViewModel.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -75,7 +82,7 @@ public class RepairServiceImpl implements RepairService {
     @Override
     public RepairViewModel findById(Long id) {
         return repairRepository.findById(id)
-                .map(rep-> modelMapper.map(rep, RepairViewModel.class))
+                .map(rep -> modelMapper.map(rep, RepairViewModel.class))
                 .orElse(null);
     }
 
@@ -83,7 +90,7 @@ public class RepairServiceImpl implements RepairService {
     public List<RepairViewModel> findRepairByCarId(Long id) {
         return repairRepository.findAllByCar_Id(id)
                 .stream()
-                .map(rv-> modelMapper.map(rv, RepairViewModel.class))
+                .map(rv -> modelMapper.map(rv, RepairViewModel.class))
                 .collect(Collectors.toList());
     }
 }

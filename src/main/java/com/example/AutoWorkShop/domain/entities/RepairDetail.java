@@ -13,6 +13,7 @@ public class RepairDetail extends BaseEntity{
     private BigDecimal price;
     private AutoPartEntity autoParts;
 
+
     public RepairDetail() {
     }
 

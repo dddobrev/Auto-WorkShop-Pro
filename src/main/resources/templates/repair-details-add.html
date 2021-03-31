@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment::head"></head>
+
+<body>
+
+<header th:replace="fragments/fragment::navbar"></header>
+
+<main class="my-main">
+    <div class="container">
+        <h2 class="text-center text-white">add repair details</h2>
+        <form th:action="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}"
+              th:object="${repairDetailsAddBindingModel}"
+              method="POST"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="form-group col-md-8 mb-3">
+                    <label class="text-center text-white font-weight-bold" for="autoParts">Enter parts</label>
+                    <select
+                            id="autoParts"
+                            name="autoParts"
+                            th:errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- part selection -</option>
+                        <option th:each="f: ${parts}" th:object="${f}"
+                                th:text="|${f.manufacturer.manufacturerName} N: ${f.partNumber} OE: ${f.partOeNumber} name: ${f.name}|"
+                                th:value="${f.id}"
+                                th:selected="${f.id} == ${f}"
+                        >parts
+                        </option>
+                        <!--                        <small id="autoPartsError"-->
+                        <!--                               class="invalid-feedback text-light form-text bg-danger rounded">-->
+                        <!--                            You must select parts</small>-->
+                    </select>
+                </div>
+                <!--                second place-->
+                <div class="form-group col-md-4 mb-3">
+                    <label for="price" class="text-white font-weight-bold">price</label>
+                    <input id="price"
+                           name="price"
+                           th:value="*{price}"
+                           th:errorclass="is-invalid"
+                           type="number" min="0" step="0.01"
+                           class="form-control" placeholder="price for this secrvice"/>
+                    <small id="priceError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        Price are positive number</small>
+                </div>
+
+                <!--                second place-->
+            </div>
+            <div class="row">
+
+            </div>
+
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="repairDescription">repair description</label>
+                <textarea id="repairDescription" name="repairDescription" type="textarea" class="form-control" rows="3"
+                          placeholder="repair description"></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label class="text-white font-weight-bold" for="remarks">remarks</label>
+                <textarea id="remarks" name="remarks" type="textarea" class="form-control" rows="3"
+                          placeholder="remarks"></textarea>
+            </div>
+
+
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-secondary" value="add"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment::footer"></footer>
+</body>
+</html>

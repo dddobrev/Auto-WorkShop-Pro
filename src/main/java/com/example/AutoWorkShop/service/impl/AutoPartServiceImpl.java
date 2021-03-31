@@ -51,6 +51,15 @@ public class AutoPartServiceImpl implements AutoPartService {
     }
 
     @Override
+    public List<AutoPartsViewModel> findAllAutoParts() {
+        return this.autoPartRepository
+                .findAll()
+                .stream()
+                .map(ap-> modelMapper.map(ap, AutoPartsViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean partExist(String partNumber) {
         return autoPartRepository.findByPartNumber(partNumber).isEmpty();
     }
@@ -72,7 +81,7 @@ public class AutoPartServiceImpl implements AutoPartService {
 
     @Override
     public AutoPartsViewModel findAutoPartById(Long id) {
-        return autoPartRepository.findById(id)
+        return this.autoPartRepository.findById(id)
                 .map(ap-> modelMapper.map(ap, AutoPartsViewModel.class))
                 .orElse(null);
     }

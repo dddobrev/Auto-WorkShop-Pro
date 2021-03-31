@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AutoPartService {
+
     AutoPartsViewModel findAutoPartByNumber(String number);
 
     List<AutoPartsViewModel> findAutoPartByOeNumber(String oeNumber);
 
     List<AutoPartsViewModel> findAutoPartsByName(String name);
+
+    List<AutoPartsViewModel> findAllAutoParts();
 
     boolean partExist(String partNumber);
 

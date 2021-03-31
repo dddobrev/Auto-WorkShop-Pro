@@ -1,9 +1,12 @@
 package com.example.AutoWorkShop.web;
 
 import com.example.AutoWorkShop.domain.binding.RepairAddBindingModel;
-import com.example.AutoWorkShop.domain.entities.RepairEntity;
+import com.example.AutoWorkShop.domain.binding.RepairDetailsAddBindingModel;
+import com.example.AutoWorkShop.domain.entities.RepairDetail;
 import com.example.AutoWorkShop.domain.service.RepairAddServiceModel;
+import com.example.AutoWorkShop.service.AutoPartService;
 import com.example.AutoWorkShop.service.CarService;
+import com.example.AutoWorkShop.service.RepairDetailService;
 import com.example.AutoWorkShop.service.RepairService;
 import com.example.AutoWorkShop.view.CarViewModel;
 import com.example.AutoWorkShop.view.CarViewModelWithRepairs;
@@ -19,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/repairs")
@@ -28,13 +30,19 @@ public class RepairController {
     private final ModelMapper modelMapper;
     private final CarService carService;
     private final RepairService repairService;
+    private final RepairDetailService repairDetailService;
+    private final AutoPartService autoPartService;
 
     public RepairController(ModelMapper modelMapper,
                             CarService carService,
-                            RepairService repairService) {
+                            RepairService repairService,
+                            RepairDetailService repairDetailService,
+                            AutoPartService autoPartService) {
         this.modelMapper = modelMapper;
         this.carService = carService;
         this.repairService = repairService;
+        this.repairDetailService = repairDetailService;
+        this.autoPartService = autoPartService;
     }
 
     @ModelAttribute("repairAddBindingModel")
@@ -74,6 +82,14 @@ public class RepairController {
         RepairViewModel repairViewModel = repairService.findById(id);
         model.addAttribute("car", repairViewModel.getCar());
         model.addAttribute("repair", repairService.findById(id));
+        if (repairViewModel.getRepairDetails().isEmpty()) {
+            model.addAttribute("notRepair", false);
+        }
+
+        List<RepairDetail> repairDetails = repairViewModel.getRepairDetails();
+        System.out.println();
+        model.addAttribute("repairDetails", repairDetails);
+
         return "repair-view";
     }
 
@@ -88,10 +104,11 @@ public class RepairController {
         return "repair-view-all";
     }
 
-    @GetMapping("/repair/car/details/{id}")
-    public String viewRepairDetails(@PathVariable Long id){
-
-        return "/";
+    @GetMapping("/repair/car/details/add/")
+    public String viewRepairDetailsAdd(@PathVariable Long id, Model model) {
+        RepairViewModel repairViewModelById = repairService.findById(id);
+        model.addAttribute("parts", autoPartService.findAllAutoParts());
+        model.addAttribute("repairDetailsAddBindingModel", new RepairDetailsAddBindingModel());
+        return "repair-details-add";
     }
-
 }
