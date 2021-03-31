@@ -175,14 +175,14 @@ public class CarController {
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.clientAddBindingModel", bindingResult);
 
-            return "redirect:edit/{id}";
+            return "redirect:/cars/edit/" + id;
         }
 
         CarAddServiceModel updatedCar = modelMapper
                 .map(carAddBindingModel, CarAddServiceModel.class);
         carService.updateClient(updatedCar);
 
-        return "redirect:/cars/view/{id}";
+        return "redirect:/cars/view/" + id;
     }
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/fragment::head"></head>
 
@@ -179,7 +180,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold"
                            for="clientEntity">Client</label>

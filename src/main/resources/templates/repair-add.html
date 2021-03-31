@@ -21,14 +21,14 @@
                     <select
                             id="car"
                             name="car"
-                            th:feld="${cars}"
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- car selection -</option>
                         <option th:each="f: ${cars}"
                                 th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
                                 th:value="${f.id}"
-                                >car
+                                th:selected="${f.id} == *{car}"
+                        >car
                         </option>
                         <small id="carError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
@@ -55,13 +55,13 @@
                     <select
                             id="classificationEnum"
                             name="classificationEnum"
-                            th:feld="*{classificationEnum}"
                             th:errorclass="is-invalid"
-                            class="form-control">
+                            class="form-control"classificationEnum>
                         <option value="">- Select classification -</option>
                         <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum).values()}"
                                 th:text="${f}"
-                                th:value="${f}">classification
+                                th:value="${f}"
+                                th:selected="${f} == *{classificationEnum}">classification
                         </option>
                         <small id="classificationEnumError"
                                class="invalid-feedback text-light form-text bg-danger rounded">

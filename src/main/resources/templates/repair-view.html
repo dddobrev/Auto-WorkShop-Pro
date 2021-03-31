@@ -62,6 +62,7 @@
             <th scope="col">repair data</th>
             <th scope="col">km</th>
             <th scope="col">classification</th>
+            <th scope="col" class="text-left">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -71,6 +72,11 @@
             <td th:text="*{dataInGarage}"></td>
             <td th:text="*{newKm}"></td>
             <td th:text="*{classificationEnum}" th:class="*{classificationEnum}"></td>
+            <td>
+                <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
+                <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
+                <a class="ml-3 text-warning text-center" th:href="@{/cars/view/{id}(id=${repair.id})}">add details</a>
+            </td>
         </tr>
         </tbody>
     </table>

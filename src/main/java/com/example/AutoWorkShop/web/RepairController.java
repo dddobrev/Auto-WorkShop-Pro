@@ -87,4 +87,11 @@ public class RepairController {
         model.addAttribute("repairs", carViewModelWithRepairs.getRepairs());
         return "repair-view-all";
     }
+
+    @GetMapping("/repair/car/details/{id}")
+    public String viewRepairDetails(@PathVariable Long id){
+
+        return "/";
+    }
+
 }

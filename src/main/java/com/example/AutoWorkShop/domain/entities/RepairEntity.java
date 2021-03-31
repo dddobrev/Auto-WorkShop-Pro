@@ -4,6 +4,8 @@ import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "repair")
@@ -16,6 +18,7 @@ public class RepairEntity extends BaseEntity {
     private LocalDate dataOutGarage;
     private ClassificationEnum classificationEnum;
     private UserEntity userEntity;
+    private List<RepairDetail> repairDetails = new ArrayList<>();
 
 
     public RepairEntity() {
@@ -56,6 +59,11 @@ public class RepairEntity extends BaseEntity {
         return userEntity;
     }
 
+    @OneToMany
+    public List<RepairDetail> getRepairDetails() {
+        return repairDetails;
+    }
+
     public RepairEntity setCar(CarEntity car) {
         this.car = car;
         return this;
@@ -88,6 +96,11 @@ public class RepairEntity extends BaseEntity {
 
     public RepairEntity setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
+        return this;
+    }
+
+    public RepairEntity setRepairDetails(List<RepairDetail> repairDetails) {
+        this.repairDetails = repairDetails;
         return this;
     }
 }

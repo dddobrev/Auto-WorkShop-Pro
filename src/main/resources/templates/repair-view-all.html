@@ -72,7 +72,7 @@
             <td th:text="*{dataOutGarage}"></td>
             <td >
                 <a sec:authorize="hasRole('ROLE_ADMIN')"
-                   class="ml-3 text-warning text-center" th:href="@{/repairs/car/{id}(id=${id})}">Repair</a>
+                   class="ml-3 text-warning text-center" th:href="@{/repairs/repair/car/{id}(id=${rep.id})}">View</a>
             </td>
         </tr>
         </tbody>

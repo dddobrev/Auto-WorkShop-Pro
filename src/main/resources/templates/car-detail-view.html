@@ -30,39 +30,46 @@
             <th scope="col" class="text-center">km</th>
             <th th:if="${notClient}" scope="col">client name</th>
             <th scope="col" class="text-center">action</th>
+            <th scope="col" class="text-center">repair</th>
         </tr>
         </thead>
-                <tbody class="text-white mt-auto">
-                <tr th:each="cl, iter: ${car}" th:object="${cl}">
-                    <th th:text="${iter.index} +1" scope="row">1</th>
-                    <td th:text="${cl.brand}"></td>
-                    <td th:text="${cl.model}"></td>
-                    <td th:text="|${cl.volume} sm3|"></td>
-                    <td th:text="|${cl.power} ps|"></td>
-                    <td th:text="${cl.coupeModel}"></td>
-                    <td th:text="${cl.engine}"></td>
-                    <td th:text="${cl.fuel}"></td>
-                    <td th:text="${cl.transmission}"></td>
-                    <td th:text="${cl.vin}"></td>
-                    <td th:text="${cl.regNumber}"></td>
-                    <td th:text="${cl.releaseDate}"></td>
-                    <td th:text="${cl.mileage}"></td>
-                    <td th:if="${notClient}" th:text="${cl.clientEntity.firstName}"></td>
-<!--                    <td sec:authorize="hasRole('ROLE_ADMIN')"-->
-<!--                        class="ml-3 text-warning text-center" th:href="@{/repairs/car/{id}(id=${cl.id})/details/all}"></td>-->
-                    <td >
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/edit/{id}(id=*{id})}">Edit</a>
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/repairs/car/details/all/{id}(id=${id})}">Repair</a>
-                    </td>
-                </tr>
-                </tbody>
+        <tbody class="text-white mt-auto">
+        <tr th:each="cl, iter: ${car}" th:object="${cl}">
+            <th th:text="${iter.index} +1" scope="row">1</th>
+            <td th:text="${cl.brand}"></td>
+            <td th:text="${cl.model}"></td>
+            <td th:text="|${cl.volume} sm3|"></td>
+            <td th:text="|${cl.power} ps|"></td>
+            <td th:text="${cl.coupeModel}"></td>
+            <td th:text="${cl.engine}"></td>
+            <td th:text="${cl.fuel}"></td>
+            <td th:text="${cl.transmission}"></td>
+            <td th:text="${cl.vin}"></td>
+            <td th:text="${cl.regNumber}"></td>
+            <td th:text="${cl.releaseDate}"></td>
+            <td th:text="${cl.mileage}"></td>
+            <td th:if="${notClient}" th:text="${cl.clientEntity.firstName}"></td>
+            <!--                    <td sec:authorize="hasRole('ROLE_ADMIN')"-->
+            <!--                        class="ml-3 text-warning text-center" th:href="@{/repairs/car/{id}(id=${cl.id})/details/all}"></td>-->
+            <td>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"
+                   th:href="@{/cars/edit/{id}(id=*{id})}">edit</a>
+            </td>
+            <td>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"
+                   th:href="@{/repairs/car/details/all/{id}(id=${id})}">view</a>
+                <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
+<!--                   th:href="@{/repairs/add/{id}(id=${id})}">add</a>-->
+            </td>
+        </tr>
+        </tbody>
     </table>
     <div><h3 th:if="${notFound}" class="text-center text-warning">car not found</h3></div>
     <form th:action="@{/cars/search}">
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex rounded-bottom">
-                    <input   type="submit" class="btn btn-secondary" value="new search"/>
+                    <input type="submit" class="btn btn-secondary" value="new search"/>
                 </div>
             </div>
         </div>

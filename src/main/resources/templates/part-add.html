@@ -47,9 +47,9 @@
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select supplier -</option>
-                        <option th:each="sp: ${supplier}"
-                                th:text="${sp.supplierName}"
-                                th:value="${sp.id}"
+                        <option th:each="sp: ${supplier}" th:object="${sp}"
+                                th:text="*{supplierName}"
+                                th:value="*{id}"
                                 th:selected="${sp.id} == ${supplier}">Supplier
                         </option>
                         <small id="supplierError"
