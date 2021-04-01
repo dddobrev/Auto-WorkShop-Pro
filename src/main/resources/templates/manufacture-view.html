@@ -15,9 +15,9 @@
             </tr>
             </thead>
             <tbody th:unless="${notFound}"  class="text-white">
-            <tr th:object="${manufactureViewModel}">
+            <tr th:object="${manufacturer}">
 <!--                <th th:text="${iter.index} +1" scope="row">1</th>-->
-                <td th:text="${manufacturer.manufacturerName}">Mark</td>
+                <td th:text="*{manufacturerName}">Mark</td>
 <!--                <td th:text="${cl.secondName}">Otto</td>-->
 <!--                <td th:text="${cl.telephone}">@mdo</td>-->
                 <td>

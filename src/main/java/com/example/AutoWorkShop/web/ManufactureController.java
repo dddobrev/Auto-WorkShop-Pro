@@ -1,16 +1,17 @@
 package com.example.AutoWorkShop.web;
 
-import com.example.AutoWorkShop.domain.entities.ManufacturerEntity;
+import com.example.AutoWorkShop.domain.binding.ManufactureAddBindingModel;
+import com.example.AutoWorkShop.domain.service.ManufacturerAddServiceModel;
 import com.example.AutoWorkShop.service.ManufacturerService;
-import com.example.AutoWorkShop.view.ClientViewModel;
 import com.example.AutoWorkShop.view.ManufactureViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/manufacturers")
@@ -34,23 +35,28 @@ public class ManufactureController {
     }
 
     @PostMapping("/add")
-    public String addManufactureSuccessful(Model model, String manufacturerName) {
+    public String addManufactureSuccessful(@Valid ManufactureAddBindingModel manufactureAddBindingModel,
+                                           BindingResult bindingResult,
+                                           RedirectAttributes redirectAttributes) {
 
-        if (manufacturerName.trim().isBlank()) {
-            model.addAttribute("noSuccess", true);
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("manufactureAddBindingModel", manufactureAddBindingModel);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.manufactureAddBindingModel", bindingResult);
+
             return "redirect:/manufacturers/add";
         }
-        //todo make save with view model
-        ManufacturerEntity manufacturerEntity = new ManufacturerEntity();
-        manufacturerEntity.setManufacturerName(manufacturerName);
-        manufacturerService.inputManufactures(manufacturerEntity);
 
-        return "redirect:/manufacturers/search";
+        ManufacturerAddServiceModel newManufacture = modelMapper
+                .map(manufactureAddBindingModel, ManufacturerAddServiceModel.class);
+
+        Long newId = manufacturerService.inputManufactures(newManufacture);
+
+        return "redirect:/manufacturers/search/" + newId;
     }
 
     @GetMapping("/search")
     public String searchManufacturesGet() {
-
         return "manufacture-search";
     }
 
@@ -66,5 +72,36 @@ public class ManufactureController {
             }
         }
         return "manufacture-view";
+    }
+
+    @GetMapping("/search/{id}")
+    public String searchManufacturesGetById(@PathVariable Long id, Model model) {
+        model.addAttribute("manufacturer", manufacturerService.findManufacturerId(id));
+        return "manufacture-view";
+    }
+    @GetMapping("/edit/{id}")
+    public String editManufacturesGetById(@PathVariable Long id, Model model) {
+        model.addAttribute( "manufacturer", manufacturerService.findManufacturerId(id));
+        return "manufacture-edit";
+    }
+
+    @PatchMapping("/edit/{id}")
+    public String editManufacturer(@PathVariable Long id,
+                                   @Valid ManufactureAddBindingModel manufactureAddBindingModel,
+                                   BindingResult bindingResult,
+                                   RedirectAttributes redirectAttributes){
+
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("manufactureAddBindingModel", manufactureAddBindingModel);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.manufactureAddBindingModel", bindingResult);
+
+            return "redirect:edit/{id}";
+        }
+        ManufacturerAddServiceModel newManufacture = modelMapper
+                .map(manufactureAddBindingModel, ManufacturerAddServiceModel.class);
+        manufacturerService.updateManufactures(newManufacture);
+
+        return "redirect:/manufacturers/search/" +id;
     }
 }

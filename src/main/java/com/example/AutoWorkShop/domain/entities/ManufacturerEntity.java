@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "manufacturer")
 public class ManufacturerEntity extends BaseEntity{
     private String manufacturerName;
-    private Set<AutoPartEntity> autoParts = new HashSet<>();
+//    private Set<AutoPartEntity> autoParts = new HashSet<>();
 
     public ManufacturerEntity() {
     }
@@ -25,18 +25,18 @@ public class ManufacturerEntity extends BaseEntity{
         return manufacturerName;
     }
 
-    @OneToMany(mappedBy = "manufacturer")
-    public Set<AutoPartEntity> getAutoParts() {
-        return autoParts;
-    }
+//    @OneToMany
+//    public Set<AutoPartEntity> getAutoParts() {
+//        return autoParts;
+//    }
 
     public ManufacturerEntity setManufacturerName(String manufacturerName) {
         this.manufacturerName = manufacturerName;
         return this;
     }
 
-    public ManufacturerEntity setAutoParts(Set<AutoPartEntity> autoParts) {
-        this.autoParts = autoParts;
-        return this;
-    }
+//    public ManufacturerEntity setAutoParts(Set<AutoPartEntity> autoParts) {
+//        this.autoParts = autoParts;
+//        return this;
+//    }
 }

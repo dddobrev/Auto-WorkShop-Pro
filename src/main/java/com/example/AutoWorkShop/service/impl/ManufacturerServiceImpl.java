@@ -1,6 +1,7 @@
 package com.example.AutoWorkShop.service.impl;
 
 import com.example.AutoWorkShop.domain.entities.ManufacturerEntity;
+import com.example.AutoWorkShop.domain.service.ManufacturerAddServiceModel;
 import com.example.AutoWorkShop.repository.ManufacturerRepository;
 import com.example.AutoWorkShop.service.ManufacturerService;
 import com.example.AutoWorkShop.view.ManufactureViewModel;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,16 +34,20 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public void inputManufactures(ManufacturerEntity manufacturerEntity) {
+    public ManufactureViewModel findManufacturerId(Long id) {
+        return manufacturerRepository.findById(id)
+                .map(manufacturerEntity -> modelMapper.map(manufacturerEntity, ManufactureViewModel.class))
+                .orElse(null);
+    }
 
-        Optional<ManufacturerEntity> manufacturerEntityByManufacturerName =
-                manufacturerRepository
-                        .findManufacturerEntityByManufacturerName(manufacturerEntity.getManufacturerName());
-        if (!manufacturerEntityByManufacturerName.isPresent()) {
-            ManufacturerEntity manEntity = new ManufacturerEntity();
-            manEntity.setManufacturerName(manufacturerEntity.getManufacturerName().toUpperCase());
-            manufacturerRepository.save(manEntity);
-        }
+    @Override
+    public Long inputManufactures(ManufacturerAddServiceModel newManufacture) {
+
+        ManufacturerEntity manufacturerEntity =
+                modelMapper.map(newManufacture, ManufacturerEntity.class);
+        manufacturerEntity.setManufacturerName(newManufacture.getManufacturerName());
+        manufacturerRepository.save(manufacturerEntity);
+        return manufacturerEntity.getId();
     }
 
     @Override
@@ -53,5 +57,15 @@ public class ManufacturerServiceImpl implements ManufacturerService {
                 .stream()
                 .map(man -> modelMapper.map(man, ManufactureViewModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateManufactures(ManufacturerAddServiceModel newManufacture) {
+        ManufacturerEntity manufacturerEntity = manufacturerRepository
+                .findById(newManufacture.getId()).orElse(null);
+        if (manufacturerEntity!=null){
+            manufacturerEntity.setManufacturerName(newManufacture.getManufacturerName());
+            manufacturerRepository.save(manufacturerEntity);
+        }
     }
 }
