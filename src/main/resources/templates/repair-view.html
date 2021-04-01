@@ -99,15 +99,16 @@
         <tr class="my-main text-white mt-auto"
             th:each="rep, iter: ${repairDetails}" th:object="${rep}" >
             <th th:text="${iter.index} + 1" scope="row">#</th>
-            <td th:text="${rep.autoParts.manufacturer}">part brand</td>
+            <td th:text="${rep.autoParts.manufacturer.manufacturerName}">part brand</td>
             <td th:text="${rep.autoParts.partNumber}">part N</td>
-            <td th:unless="${rep.autoParts.partOeNumber.isBlank()}" th:text="${rep.autoParts.partOeNumber}">part OE N</td>
+            <td th:text="${rep.autoParts.partOeNumber}">part OE N</td>
+<!--            <td th:if="${rep.autoParts.partOeNumber.isBlank()}" th:text="N/A">part OE N</td>-->
             <td th:text="${rep.repairDescription}">description</td>
             <td th:text="${rep.remarks}">remarks</td>
             <td>
                 <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
                 <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
-                <a class="ml-3 text-warning text-center" th:href="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}">add details</a>
+<!--                <a class="ml-3 text-warning text-center" th:href="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}">add details</a>-->
             </td>
         </tr>
         </tbody>

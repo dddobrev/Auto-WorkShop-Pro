@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RepairDetailService {
 
-    Long inputRepairDetails(RepairDetailsAddServiceModel repairDetailsAddServiceModel, Long id);
+    Long inputRepairDetails(RepairDetailsAddServiceModel repairDetailsAddServiceModel);
 
     List<RepairDetailsViewModel> findAllByRepairId(Long id);
 

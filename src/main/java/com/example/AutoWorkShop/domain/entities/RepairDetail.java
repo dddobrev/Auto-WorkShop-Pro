@@ -15,7 +15,7 @@ public class RepairDetail extends BaseEntity{
     public RepairDetail() {
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     public RepairEntity getRepair() {
         return repair;
     }
@@ -35,7 +35,7 @@ public class RepairDetail extends BaseEntity{
         return price;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     public AutoPartEntity getAutoParts() {
         return autoParts;
     }

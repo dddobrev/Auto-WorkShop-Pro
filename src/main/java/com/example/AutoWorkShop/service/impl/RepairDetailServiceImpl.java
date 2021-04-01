@@ -29,17 +29,21 @@ public class RepairDetailServiceImpl implements RepairDetailService {
     }
 
     @Override
-    public Long inputRepairDetails(RepairDetailsAddServiceModel repairDetailsAddServiceModel, Long id) {
+    public Long inputRepairDetails(RepairDetailsAddServiceModel repairDetailsAddServiceModel) {
+
         RepairDetail newRepairDetail = modelMapper
                 .map(repairDetailsAddServiceModel, RepairDetail.class);
-        RepairEntity repairEntity = repairRepository.findById(id).orElse(null);
+
+//        RepairEntity repairEntity = repairRepository.findById(id).orElse(null);
         newRepairDetail
-                .setRepair(repairEntity)
                 .setAutoParts(repairDetailsAddServiceModel.getAutoParts())
                 .setPrice(repairDetailsAddServiceModel.getPrice())
                 .setRepairDescription(repairDetailsAddServiceModel.getRepairDescription())
                 .setRemarks(repairDetailsAddServiceModel.getRemarks());
         repairDetailRepository.save(newRepairDetail);
+//        newRepairDetail.setRepair(repairEntity);
+//        repairDetailRepository.save(newRepairDetail);
+
 //        repairEntity.addDetails(newRepairDetail);
 //        repairRepository.save(repairEntity);
         return newRepairDetail.getId();

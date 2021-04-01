@@ -6,7 +6,9 @@ import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RepairViewModel {
     private Long id;
@@ -14,7 +16,7 @@ public class RepairViewModel {
     private Integer newKm;
     private LocalDate dataInGarage;
     private LocalDate dataOutGarage;
-    private List<RepairDetail> repairDetails = new ArrayList<>();
+    private Set<RepairDetail> repairDetails = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -46,7 +48,7 @@ public class RepairViewModel {
         return classificationEnum;
     }
 
-    public List<RepairDetail> getRepairDetails() {
+    public Set<RepairDetail> getRepairDetails() {
         return repairDetails;
     }
 
@@ -80,4 +82,8 @@ public class RepairViewModel {
         return this;
     }
 
+    public RepairViewModel setRepairDetails(Set<RepairDetail> repairDetails) {
+        this.repairDetails = repairDetails;
+        return this;
+    }
 }

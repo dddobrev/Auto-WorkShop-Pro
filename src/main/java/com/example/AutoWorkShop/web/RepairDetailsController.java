@@ -20,18 +20,15 @@ import javax.validation.Valid;
 @RequestMapping("/repairs")
 public class RepairDetailsController {
     private final ModelMapper modelMapper;
-    private final CarService carService;
     private final RepairService repairService;
     private final RepairDetailService repairDetailService;
     private final AutoPartService autoPartService;
 
     public RepairDetailsController(ModelMapper modelMapper,
-                                   CarService carService,
                                    RepairService repairService,
                                    RepairDetailService repairDetailService,
                                    AutoPartService autoPartService) {
         this.modelMapper = modelMapper;
-        this.carService = carService;
         this.repairService = repairService;
         this.repairDetailService = repairDetailService;
         this.autoPartService = autoPartService;
@@ -47,12 +44,12 @@ public class RepairDetailsController {
         RepairViewModel repairViewModelById = repairService.findById(id);
         model.addAttribute("parts", autoPartService.findAllAutoParts());
         model.addAttribute("repair", repairViewModelById);
-//        model.addAttribute("repairDetailsAddBindingModel", new RepairDetailsAddBindingModel());
+
         return "repair-details-add";
     }
 
-    @PostMapping("/repair/car/details/add/{id}")
-    public String addViewRepairDetailsSuccessfully(@PathVariable Long id,
+    @PostMapping("/repair/car/details/add/")
+    public String addViewRepairDetailsSuccessfully(
                                                    @Valid RepairDetailsAddBindingModel repairDetailsAddBindingModel,
                                                    BindingResult bindingResult,
                                                    RedirectAttributes redirectAttributes) {
@@ -60,12 +57,13 @@ public class RepairDetailsController {
             redirectAttributes.addFlashAttribute("repairDetailsAddBindingModel", repairDetailsAddBindingModel);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.repairDetailsAddBindingModel", bindingResult);
-            return "redirect:/repairs/repair/car/details/add/" + id;
+            return "redirect:/repairs/repair/car/details/add/";
         }
 
         RepairDetailsAddServiceModel repairDetailsAddServiceModel = modelMapper
                 .map(repairDetailsAddBindingModel, RepairDetailsAddServiceModel.class);
-        Long newId = repairDetailService.inputRepairDetails(repairDetailsAddServiceModel, id);
+        Long id = repairDetailsAddServiceModel.getRepair().getId();
+        repairDetailService.inputRepairDetails(repairDetailsAddServiceModel);
 
         return "redirect:/repairs/repair/car/" + id;
     }

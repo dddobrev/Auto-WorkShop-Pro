@@ -10,10 +10,33 @@
 <main class="my-main">
     <div class="container">
         <h2 class="text-center text-white">add repair details</h2>
-        <form th:action="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}"
+<!--        {id}(id=${repair.id})-->
+        <form th:action="@{/repairs/repair/car/details/add/}"
               th:object="${repairDetailsAddBindingModel}"
               method="POST"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+           <div class="row">
+               <div class="form-group col-md-8 mb-3">
+                   <label class="text-center text-white font-weight-bold" for="repair">Enter parts</label>
+                   <select
+                           id="repair"
+                           name="repair"
+                           th:errorclass="is-invalid"
+                           class="form-control">
+                       <option value="">- repair -</option>
+                       <option th:each="f: ${repair}"
+                               th:text="|${f.id}|"
+                               th:value="${f.id}"
+                               th:selected="${f.id} == ${f}"
+                       >parts
+                       </option>
+                       <!--                        <small id="autoPartsError"-->
+                       <!--                               class="invalid-feedback text-light form-text bg-danger rounded">-->
+                       <!--                            You must select parts</small>-->
+                   </select>
+               </div>
+           </div>
+
             <div class="row">
                 <div class="form-group col-md-8 mb-3">
                     <label class="text-center text-white font-weight-bold" for="autoParts">Enter parts</label>
@@ -47,7 +70,6 @@
                            class="invalid-feedback text-light form-text bg-danger rounded">
                         Price are positive number</small>
                 </div>
-
                 <!--                second place-->
             </div>
             <div class="row">

@@ -2,6 +2,7 @@ package com.example.AutoWorkShop.web;
 
 import com.example.AutoWorkShop.domain.binding.RepairAddBindingModel;
 import com.example.AutoWorkShop.domain.binding.RepairDetailsAddBindingModel;
+import com.example.AutoWorkShop.domain.entities.RepairDetail;
 import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 import com.example.AutoWorkShop.domain.service.RepairAddServiceModel;
 import com.example.AutoWorkShop.service.AutoPartService;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -117,15 +119,10 @@ public class RepairController {
         RepairViewModel repairViewModel = repairService.findById(id);
         model.addAttribute("car", repairViewModel.getCar());
         model.addAttribute("repair", repairService.findById(id));
-        if (repairViewModel.getRepairDetails().isEmpty()) {
-            model.addAttribute("notRepair", false);
-        }
 
-        List<RepairDetailsViewModel> repairDetailsViewModelList = repairViewModel.getRepairDetails()
-                .stream()
-                .map(rdvm -> modelMapper.map(rdvm, RepairDetailsViewModel.class))
-                .collect(Collectors.toList());
-        model.addAttribute("repairDetails", repairDetailsViewModelList);
+        Set<RepairDetail> repairDetails = repairService.findById(id).getRepairDetails();
+
+        model.addAttribute("repairDetails", repairDetails);
 
         return "repair-view";
     }

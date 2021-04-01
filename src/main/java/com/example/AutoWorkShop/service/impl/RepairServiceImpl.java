@@ -82,9 +82,12 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public RepairViewModel findById(Long id) {
-        return repairRepository.findById(id)
+        RepairEntity repairEntity = repairRepository.findById(id).orElse(null);
+
+        RepairViewModel repairViewModel = repairRepository.findById(id)
                 .map(rep -> modelMapper.map(rep, RepairViewModel.class))
                 .orElse(null);
+        return repairViewModel;
     }
 
     @Override
