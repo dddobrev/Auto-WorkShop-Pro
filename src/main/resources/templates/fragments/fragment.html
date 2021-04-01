@@ -91,9 +91,9 @@
                     </div>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form method="get"
+                    <form method="GET"
                           th:action="@{/users/view/}">
-                        <button type="submit" class="button nav-link bg-blur" sec:authentication='name' value="user">user</button>
+                        <button type="submit" class="button nav-link bg-blur" sec:authentication='name' value="">user</button>
                     </form>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">

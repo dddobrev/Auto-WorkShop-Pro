@@ -50,7 +50,7 @@
         </tr>
         </tbody>
     </table>
-    <form th:action="@{/orders/search}">
+    <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{/orders/search}">
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex rounded-bottom">

@@ -138,7 +138,6 @@ public class UserController {
                     "org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
             return "redirect:/users/edit/{id}";
         }
-//todo userEditServiceModel
         UserEditServiceModel userEditServiceModel = modelMapper
                 .map(userEditBindingModel, UserEditServiceModel.class);
         userService.updateUser(userEditServiceModel);
