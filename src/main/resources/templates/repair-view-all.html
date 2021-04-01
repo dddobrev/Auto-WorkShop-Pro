@@ -22,7 +22,7 @@
 <!--            <th scope="col">classification</th>-->
             <!--            <th scope="col" class="text-center">preferred date</th>-->
 <!--            <th scope="col" class="text-center">data out</th>-->
-            <th scope="col">client name</th>
+            <th th:unless="${notClient}" scope="col">client name</th>
             <!--            <th scope="col" class="text-center">progress</th>-->
             <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">action</th>
         </tr>
@@ -37,7 +37,7 @@
             <td th:text="${car.fuel}"></td>
             <td th:text="${car.vin}" class="center"></td>
             <td th:text="${car.regNumber}"></td>
-            <td th:text="${car.clientEntity.firstName}"></td>
+            <td th:unless="${notClient}" th:text="${car.clientEntity.firstName}"></td>
             <td>
                                 <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"
                                    th:href="@{/repairs/add/{id}(id=*{id})}">add repair</a>

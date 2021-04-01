@@ -2,6 +2,7 @@ package com.example.AutoWorkShop.web;
 
 import com.example.AutoWorkShop.domain.binding.RepairAddBindingModel;
 import com.example.AutoWorkShop.domain.binding.RepairDetailsAddBindingModel;
+import com.example.AutoWorkShop.domain.entities.ClientEntity;
 import com.example.AutoWorkShop.domain.entities.RepairDetail;
 import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 import com.example.AutoWorkShop.domain.service.RepairAddServiceModel;
@@ -10,7 +11,6 @@ import com.example.AutoWorkShop.service.CarService;
 import com.example.AutoWorkShop.service.RepairDetailService;
 import com.example.AutoWorkShop.service.RepairService;
 import com.example.AutoWorkShop.view.CarViewModelWithRepairs;
-import com.example.AutoWorkShop.view.RepairDetailsViewModel;
 import com.example.AutoWorkShop.view.RepairViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/repairs")
@@ -82,6 +80,7 @@ public class RepairController {
 
     @GetMapping("/add/{id}")
     public String addRepairCar(@PathVariable Long id, Model model) {
+
         model.addAttribute("car", carService.findCarById(id));
         model.addAttribute("classificationEnum", ClassificationEnum.values());
         return "repair-add-id";
@@ -119,7 +118,10 @@ public class RepairController {
         RepairViewModel repairViewModel = repairService.findById(id);
         model.addAttribute("car", repairViewModel.getCar());
         model.addAttribute("repair", repairService.findById(id));
-
+        ClientEntity client = repairViewModel.getCar().getClient();
+        if (client ==null) {
+            model.addAttribute("notClient", true);
+        }
         Set<RepairDetail> repairDetails = repairService.findById(id).getRepairDetails();
 
         model.addAttribute("repairDetails", repairDetails);
@@ -132,6 +134,11 @@ public class RepairController {
         CarViewModelWithRepairs carViewModelWithRepairs = carService.findCarWithRepairsById(id);
         if (carViewModelWithRepairs.getRepairs().isEmpty()) {
             model.addAttribute("notRepair", true);
+        }
+        ClientEntity clientEntity = carViewModelWithRepairs.getClientEntity();
+        System.out.println();
+        if (clientEntity == null) {
+            model.addAttribute("notClient", true);
         }
         model.addAttribute("car", carViewModelWithRepairs);
         model.addAttribute("repairs", carViewModelWithRepairs.getRepairs());

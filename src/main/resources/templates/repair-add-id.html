@@ -29,7 +29,7 @@
                             class="form-control">
                         <option value="">- car selection -</option>
                         <option th:object="${car}"
-                                th:text="|*{brand} *{model} *{regNumber} *{clientEntity.firstName}|"
+                                th:text="|*{brand} *{model} *{regNumber}|"
                                 th:value="*{id}"
                         >car
                             <!--                            th:selected="*{id} == *{cars}"-->

@@ -22,7 +22,7 @@
             <th scope="col">classification</th>
             <!--            <th scope="col" class="text-center">preferred date</th>-->
             <th scope="col" class="text-center">data out</th>
-            <th scope="col">client name</th>
+            <th th:unless="${notClient}" scope="col">client name</th>
             <!--            <th scope="col" class="text-center">progress</th>-->
             <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">action</th>
         </tr>
@@ -40,7 +40,7 @@
             <td th:text="${repair.classificationEnum}" th:class="${repair.classificationEnum}"></td>
             <!--            <td th:text="${cl.dataIn}"></td>-->
             <td th:text="${repair.dataOutGarage}" class="text-warning"></td>
-            <td th:text="${car.client.firstName}"></td>
+            <td th:unless="${notClient}" th:text="${car.client.firstName}"></td>
             <!--            <td th:text="${cl.progressEnum}" th:class="${cl.progressEnum}"></td>-->
             <td>
                 <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
