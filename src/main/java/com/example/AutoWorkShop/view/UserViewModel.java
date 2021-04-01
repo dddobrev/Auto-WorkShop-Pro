@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserViewModel {
 
-//    private Long id;
+    private Long id;
     private String username;
     private String password;
     private String email;
@@ -20,9 +20,9 @@ public class UserViewModel {
     public UserViewModel() {
     }
 
-//    public Long getId() {
-//        return id;
-//    }
+    public Long getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;
@@ -56,10 +56,10 @@ public class UserViewModel {
         return userRoles;
     }
 
-//    public UserViewModel setId(Long id) {
-//        this.id = id;
-//        return this;
-//    }
+    public UserViewModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public UserViewModel setUsername(String username) {
         this.username = username;

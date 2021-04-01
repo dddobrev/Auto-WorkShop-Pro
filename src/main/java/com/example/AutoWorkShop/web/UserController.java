@@ -1,7 +1,9 @@
 package com.example.AutoWorkShop.web;
 
+import com.example.AutoWorkShop.domain.binding.UserEditBindingModel;
 import com.example.AutoWorkShop.domain.binding.UserRegistrationBindingModel;
 import com.example.AutoWorkShop.domain.entities.UserEntity;
+import com.example.AutoWorkShop.domain.service.UserEditServiceModel;
 import com.example.AutoWorkShop.domain.service.UserRegistrationServiceModel;
 import com.example.AutoWorkShop.service.UserService;
 import com.example.AutoWorkShop.view.UserViewModel;
@@ -96,4 +98,51 @@ public class UserController {
         return "user-view";
     }
 
+//    @GetMapping("/view/{username}")
+//    public String viewUserByUsername(Model model, @AuthenticationPrincipal Principal principal,
+//                                     @PathVariable String username) {
+//        username = principal.getName();
+////        UserEntity userEntity = userService.findUserEntityByUsername(username);
+//        UserViewModel userViewModel = userService.findUserViewByUsername(username);
+//        model.addAttribute("userView", userViewModel);
+////        model.addAttribute("id", userEntity.getId());
+//        return "user-view";
+//    }
+
+    @GetMapping("/edit/{id}")
+    public String editUser(Model model,
+                           @AuthenticationPrincipal Principal principal,
+                           @PathVariable Long id) {
+        String username = principal.getName();
+        UserViewModel byId = userService.findById(id);
+        UserViewModel userViewModel = userService.findUserViewByUsername(username);
+        if (byId.getUsername().equals(username)) {
+            model.addAttribute("userEditBindingModel", new UserEditBindingModel());
+            model.addAttribute("userView", userViewModel);
+            model.addAttribute("id", id);
+        } else {
+            model.addAttribute("notAuthorize", true);
+        }
+        return "user-edit";
+    }
+
+    @PatchMapping("/edit/{id}")
+    public String editUser(@PathVariable Long id,
+                           @Valid UserEditBindingModel userEditBindingModel,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal Principal principal) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("clientAddBindingModel", userEditBindingModel);
+            redirectAttributes.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
+            return "redirect:/users/edit/{id}";
+        }
+//todo userEditServiceModel
+        UserEditServiceModel userEditServiceModel = modelMapper
+                .map(userEditBindingModel, UserEditServiceModel.class);
+        userService.updateUser(userEditServiceModel);
+
+        return "redirect:/users/view";
+    }
 }

@@ -3,6 +3,7 @@ package com.example.AutoWorkShop.service.impl;
 import com.example.AutoWorkShop.domain.entities.UserEntity;
 import com.example.AutoWorkShop.domain.entities.UserRoleEntity;
 import com.example.AutoWorkShop.domain.entities.enums.UserRoleEnum;
+import com.example.AutoWorkShop.domain.service.UserEditServiceModel;
 import com.example.AutoWorkShop.domain.service.UserRegistrationServiceModel;
 import com.example.AutoWorkShop.repository.UserRepository;
 import com.example.AutoWorkShop.repository.UserRoleRepository;
@@ -159,5 +160,16 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .findByUsername(username)
                 .orElse(null);
+    }
+
+    @Override
+    public void updateUser(UserEditServiceModel userEditServiceModel) {
+        UserEntity userEntity = userRepository
+                .findById(userEditServiceModel.getId())
+                .orElse(null);
+        userEntity.setFirstName(userEditServiceModel.getFirstName())
+                .setLastName(userEditServiceModel.getLastName())
+                .setEmail(userEditServiceModel.getEmail());
+        userRepository.save(userEntity);
     }
 }

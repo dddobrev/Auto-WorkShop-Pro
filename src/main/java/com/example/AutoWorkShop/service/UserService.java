@@ -2,6 +2,7 @@ package com.example.AutoWorkShop.service;
 
 import com.example.AutoWorkShop.domain.entities.UserEntity;
 import com.example.AutoWorkShop.domain.entities.enums.UserRoleEnum;
+import com.example.AutoWorkShop.domain.service.UserEditServiceModel;
 import com.example.AutoWorkShop.domain.service.UserRegistrationServiceModel;
 import com.example.AutoWorkShop.view.UserViewModel;
 
@@ -27,4 +28,6 @@ public interface UserService {
     UserViewModel findById(Long id);
 
     UserEntity findUserEntityByUsername(String username);
+
+    void updateUser(UserEditServiceModel userEditServiceModel);
 }
