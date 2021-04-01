@@ -1,6 +1,7 @@
 package com.example.AutoWorkShop.service.impl;
 
 import com.example.AutoWorkShop.domain.entities.CarEntity;
+import com.example.AutoWorkShop.domain.entities.RepairEntity;
 import com.example.AutoWorkShop.domain.entities.UserEntity;
 import com.example.AutoWorkShop.domain.service.CarAddServiceModel;
 import com.example.AutoWorkShop.domain.util.FileUtil;
@@ -13,7 +14,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -121,10 +125,17 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarViewModelWithRepairs findCarWithRepairsById(Long id) {
-        return carRepository
+        CarViewModelWithRepairs carViewModelWithRepairs = carRepository
                 .findCarById(id)
                 .map(car -> modelMapper.map(car, CarViewModelWithRepairs.class))
                 .orElse(null);
+        assert carViewModelWithRepairs != null;
+        Set<RepairEntity> collect = carViewModelWithRepairs.getRepairs()
+                .stream()
+                .sorted(Comparator.comparing(RepairEntity::getId))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        carViewModelWithRepairs.setRepairs(collect);
+        return carViewModelWithRepairs;
     }
 
     @Override

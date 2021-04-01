@@ -5,6 +5,7 @@ import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class RepairEntity extends BaseEntity {
     private LocalDate dataOutGarage;
     private ClassificationEnum classificationEnum;
     private UserEntity userEntity;
-    private Set<RepairDetail> repairDetails = new HashSet<>();
+    private Set<RepairDetail> repairDetails = new LinkedHashSet<>();
 
 
     public RepairEntity() {

@@ -6,7 +6,9 @@ import com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity(name = "cars")
 public class CarEntity extends BaseEntity {
@@ -26,7 +28,7 @@ public class CarEntity extends BaseEntity {
     private Integer mileageDifferent;
     private UserEntity userEntity;
     private Set<OrderEntity> orders = new HashSet<>();
-    private Set<RepairEntity> repairs = new HashSet<>();;
+    private Set<RepairEntity> repairs = new LinkedHashSet<>();;
 
     public CarEntity() {
     }

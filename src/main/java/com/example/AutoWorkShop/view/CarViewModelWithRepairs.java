@@ -7,6 +7,7 @@ import com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class CarViewModelWithRepairs {
@@ -23,7 +24,7 @@ public class CarViewModelWithRepairs {
     private LocalDate releaseDate;
     private ClientEntity clientEntity;
     private Integer mileage;
-    private Set<RepairEntity> repairs = new HashSet<>();;
+    private Set<RepairEntity> repairs = new LinkedHashSet<>();;
 
     public CarViewModelWithRepairs() {
     }
