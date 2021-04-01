@@ -29,7 +29,7 @@ public class AutoPartServiceImpl implements AutoPartService {
         return this.autoPartRepository
                 .findByPartNumber(number)
                 .map(ap -> modelMapper.map(ap, AutoPartsViewModel.class))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(null);
     }
 
     @Override

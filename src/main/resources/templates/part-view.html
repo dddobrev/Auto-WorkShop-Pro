@@ -12,7 +12,7 @@
     <!--        <h3 class="text-center text-white mt-5">client not found</h3>-->
     <!--    </div>-->
 
-    <table class="table text-white">
+    <table  class="table text-white">
         <thead>
         <tr class="my-main text-white mt-auto">
             <th scope="col">#</th>
@@ -27,7 +27,8 @@
 
         <tbody class="text-white mt-auto">
         <h3 class="text-warning text-center" th:if="${emptyFeeds}">Please input some data</h3>
-        <tr th:each="cl, iter: ${parts}" th:object="${cl}">
+        <h3 class="text-warning text-center" th:if="${notFound}">this part not found</h3>
+        <tr th:unless="${notFound}" th:each="cl, iter: ${parts}" th:object="${cl}">
             <th th:text="${iter.index} +1" scope="row">1</th>
             <td th:text="${cl.manufacturer.manufacturerName}"></td>
             <td th:text="${cl.name}"></td>
@@ -42,15 +43,29 @@
         </tr>
         </tbody>
     </table>
-    <form th:action="@{/parts/search}">
-        <div class="row">
-            <div class="col col-md-4">
-                <div class="button-holder d-flex rounded-bottom">
-                    <input type="submit" class="btn btn-secondary" value="new search"/>
+        <div class="row align-content-center m-3">
+
+            <form th:action="@{/parts/search}">
+                <div class="row align-content-center m-0">
+                    <div class="col col-md-4 center">
+                        <div class="button-holder d-flex rounded-bottom">
+                            <input type="submit" class="btn btn-secondary" value="new search"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
+
+            <form th:action="@{/parts/add}">
+                <div class="row align-content-center m-0">
+                    <div class="col col-md-4 center">
+                        <div class="button-holder d-flex rounded-bottom">
+                            <input type="submit" class="btn btn-secondary" value="add parts"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
         </div>
-    </form>
 
 </main>
 <footer th:replace="/fragments/fragment::footer"></footer>

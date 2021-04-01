@@ -25,7 +25,7 @@
                             class="form-control">
                         <option value="">- car selection -</option>
                         <option th:each="f: ${cars}"
-                                th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
+                                th:text="|${f.brand} ${f.model} ${f.regNumber}|"
                                 th:value="${f.id}"
                                 th:selected="${f.id} == *{car}"
                         >car

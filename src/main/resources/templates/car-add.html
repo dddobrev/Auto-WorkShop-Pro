@@ -193,7 +193,7 @@
                         <option th:each="cl: ${clientEntity}"
                                 th:text="|${cl.firstName} ${cl.secondName} ${cl.telephone}|"
                                 th:value="${cl.id}"
-                                th:selected="${cl} == *{clientEntity}">client
+                                th:selected="${cl.id} == *{clientEntity}">client
                         </option>
                     </select>
                     <small id="classificationEnumError"

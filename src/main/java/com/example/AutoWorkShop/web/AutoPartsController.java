@@ -81,14 +81,17 @@ public class AutoPartsController {
 
 
         if (!partNumber.isBlank() && partOeNumber.isBlank()) {
-            if (autoPartService.findAutoPartByNumber(partNumber).getPartOeNumber().isEmpty()) {
-                model.addAttribute("notOEN", true);
-            }
+
             AutoPartsViewModel autoPartByNumber = autoPartService.findAutoPartByNumber(partNumber);
+
             if (autoPartByNumber != null) {
                 model.addAttribute("parts", autoPartByNumber);
                 model.addAttribute("notFound", false);
+            } else {
+                model.addAttribute("notOEN", true);
+                model.addAttribute("notFound", true);
             }
+
         } else if (partNumber.isBlank() && !partOeNumber.isBlank()) {
             if (autoPartService.findAutoPartByOeNumber(partOeNumber).isEmpty()) {
                 model.addAttribute("notOEN", true);
