@@ -79,6 +79,7 @@ public class RepairServiceImpl implements RepairService {
         return newRepairEntity.getId();
     }
 
+
     @Override
     public RepairViewModel findById(Long id) {
         return repairRepository.findById(id)
@@ -92,5 +93,28 @@ public class RepairServiceImpl implements RepairService {
                 .stream()
                 .map(rv -> modelMapper.map(rv, RepairViewModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long inputRepairByCarId(RepairAddServiceModel newRepair, Long id) {
+        RepairEntity newRepairEntity = modelMapper
+                .map(newRepair, RepairEntity.class);
+
+        LocalDate now = LocalDate.now();
+
+        UserEntity username = userRepository.
+                findByUsername(newRepair.getUserEntity()).orElse(null);
+
+        CarEntity carEntity = carService.findCarEntityById(id);
+        System.out.println();
+        newRepairEntity.setUserEntity(username)
+                .setCar(carEntity)
+                .setClassificationEnum(newRepair.getClassificationEnum())
+                .setDataInGarage(now)
+                .setNewKm(newRepair.getNewKm());
+
+        repairRepository.save(newRepairEntity);
+
+        return newRepairEntity.getId();
     }
 }

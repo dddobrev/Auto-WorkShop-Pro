@@ -18,7 +18,7 @@ public class RepairEntity extends BaseEntity {
     private LocalDate dataOutGarage;
     private ClassificationEnum classificationEnum;
     private UserEntity userEntity;
-    private Set<RepairDetail> repairDetails = new HashSet<>();
+//    private Set<RepairDetail> repairDetails = new HashSet<>();
 
 
     public RepairEntity() {
@@ -59,10 +59,10 @@ public class RepairEntity extends BaseEntity {
         return userEntity;
     }
 
-    @OneToMany
-    public Set<RepairDetail> getRepairDetails() {
-        return repairDetails;
-    }
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    public Set<RepairDetail> getRepairDetails() {
+//        return repairDetails;
+//    }
 
     public RepairEntity setCar(CarEntity car) {
         this.car = car;
@@ -99,8 +99,12 @@ public class RepairEntity extends BaseEntity {
         return this;
     }
 
-    public RepairEntity setRepairDetails(Set<RepairDetail> repairDetails) {
-        this.repairDetails = repairDetails;
-        return this;
-    }
+//    public RepairEntity setRepairDetails(Set<RepairDetail> repairDetails) {
+//        this.repairDetails = repairDetails;
+//        return this;
+//    }
+//    public RepairEntity addDetails(RepairDetail repairDetail) {
+//        this.repairDetails.add(repairDetail);
+//        return this;
+//    }
 }

@@ -2,14 +2,14 @@ package com.example.AutoWorkShop.web;
 
 import com.example.AutoWorkShop.domain.binding.RepairAddBindingModel;
 import com.example.AutoWorkShop.domain.binding.RepairDetailsAddBindingModel;
-import com.example.AutoWorkShop.domain.entities.RepairDetail;
+import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 import com.example.AutoWorkShop.domain.service.RepairAddServiceModel;
 import com.example.AutoWorkShop.service.AutoPartService;
 import com.example.AutoWorkShop.service.CarService;
 import com.example.AutoWorkShop.service.RepairDetailService;
 import com.example.AutoWorkShop.service.RepairService;
-import com.example.AutoWorkShop.view.CarViewModel;
 import com.example.AutoWorkShop.view.CarViewModelWithRepairs;
+import com.example.AutoWorkShop.view.RepairDetailsViewModel;
 import com.example.AutoWorkShop.view.RepairViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/repairs")
@@ -77,6 +78,40 @@ public class RepairController {
         return "redirect:/repairs/repair/car/" + newId;
     }
 
+    @GetMapping("/add/{id}")
+    public String addRepairCar(@PathVariable Long id, Model model) {
+        model.addAttribute("car", carService.findCarById(id));
+        model.addAttribute("classificationEnum", ClassificationEnum.values());
+        return "repair-add-id";
+    }
+
+//    @PostMapping("/add/{id}")
+//    public String addRepairCarByIdSuccessfully(@PathVariable Long id,
+//                                               @Valid RepairAddBindingModel repairAddBindingModel,
+//                                               BindingResult bindingResult,
+//                                               RedirectAttributes redirectAttributes,
+//                                               @AuthenticationPrincipal UserDetails principal) {
+//
+//
+//
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("repairAddBindingModel", repairAddBindingModel);
+//            redirectAttributes.addFlashAttribute(
+//                    "org.springframework.validation.BindingResult.repairAddBindingModel", bindingResult);
+//            return "redirect:/repairs/add/" + id;
+//        }
+//
+//        RepairAddServiceModel newRepair = modelMapper
+//                .map(repairAddBindingModel, RepairAddServiceModel.class);
+//        String username = principal.getUsername();
+//        newRepair.setUserEntity(username);
+//
+//        Long newId = repairService.inputRepair(newRepair);
+//
+//
+//        return "redirct:/repairs/car/details/all/" + id;
+//    }
+
     @GetMapping("/repair/car/{id}")
     public String viewCarRepair(@PathVariable Long id, Model model) {
         RepairViewModel repairViewModel = repairService.findById(id);
@@ -86,9 +121,11 @@ public class RepairController {
             model.addAttribute("notRepair", false);
         }
 
-        List<RepairDetail> repairDetails = repairViewModel.getRepairDetails();
-        System.out.println();
-        model.addAttribute("repairDetails", repairDetails);
+        List<RepairDetailsViewModel> repairDetailsViewModelList = repairViewModel.getRepairDetails()
+                .stream()
+                .map(rdvm -> modelMapper.map(rdvm, RepairDetailsViewModel.class))
+                .collect(Collectors.toList());
+        model.addAttribute("repairDetails", repairDetailsViewModelList);
 
         return "repair-view";
     }

@@ -18,4 +18,6 @@ public interface RepairService {
     RepairViewModel findById(Long id);
 
     List<RepairViewModel> findRepairByCarId(Long id);
+
+    Long inputRepairByCarId(RepairAddServiceModel newRepair, Long id);
 }

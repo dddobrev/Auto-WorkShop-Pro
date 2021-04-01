@@ -14,8 +14,12 @@
               th:object="${repairAddBindingModel}"
               method="POST"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+<!--            <div class="row">-->
+<!--                <h4 th:text="|${car.brand} ${car.model} ${car.regNumber}|" class="text-md-center text-warning"></h4>-->
+<!--            </div>-->
             <div class="row">
 
+<!--drop down start-->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" for="car">Enter car</label>
                     <select
@@ -24,17 +28,19 @@
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- car selection -</option>
-                        <option th:each="f: ${cars}"
-                                th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
-                                th:value="${f.id}"
-                                th:selected="${f.id} == *{car}"
+                        <option th:object="${car}"
+                                th:text="|*{brand} *{model} *{regNumber} *{clientEntity.firstName}|"
+                                th:value="*{id}"
                         >car
+                            <!--                            th:selected="*{id} == *{cars}"-->
                         </option>
                     </select>
                     <small id="carError"
                            class="invalid-feedback text-light form-text bg-danger rounded">
                         You must select car</small>
                 </div>
+<!--                dropdown end-->
+
                 <div class="form-group col-md-6 mb-3">
                     <label for="newKm" class="text-white font-weight-bold">Mileage</label>
                     <input id="newKm"
@@ -58,7 +64,7 @@
                             th:errorclass="is-invalid"
                             class="form-control"classificationEnum>
                         <option value="">- Select classification -</option>
-                        <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum).values()}"
+                        <option th:each="f: ${classificationEnum}"
                                 th:text="${f}"
                                 th:value="${f}"
                                 th:selected="${f} == *{classificationEnum}">classification
@@ -68,27 +74,8 @@
                            class="invalid-feedback text-light form-text bg-danger rounded">
                         You must select classification</small>
                 </div>
-
-                <!--                <div class="form-group col-md-6 mb-3">-->
-                <!--                    <label for="dataOrder" class="text-white font-weight-bold">Creation date</label>-->
-                <!--                    <input-->
-                <!--                            id="dataOrder"-->
-                <!--                            name="dataOrder"-->
-                <!--                            th:value="*{dataOrder}"-->
-                <!--                            th:errorclass="is-invalid"-->
-                <!--                            type="date" class="form-control"-->
-                <!--                            placeholder="Creation date"/>-->
-                <!--                    <small id="dataOrderError"-->
-                <!--                           class="invalid-feedback text-light form-text bg-danger rounded">-->
-                <!--                        date cannot be in the future</small>-->
-                <!--                </div>-->
             </div>
 
-            <!--            <div class="form-group">-->
-            <!--                <label class="text-white font-weight-bold" for="comment">Problem description</label>-->
-            <!--                <textarea id="comment" name="comment" type="textarea" class="form-control" rows="3"-->
-            <!--                          placeholder="comment"></textarea>-->
-            <!--            </div>-->
 
             <div class="row">
                 <div class="col col-md-4">

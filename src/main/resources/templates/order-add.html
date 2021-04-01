@@ -27,12 +27,12 @@
                         <option th:each="f: ${cars}"
                                 th:text="|${f.brand} ${f.model} ${f.regNumber} ${f.clientEntity.firstName}|"
                                 th:value="${f.id}"
-                                th:selected="${f.id} ==*{car}">car
+                                th:selected="${f} == *{car}">car
                         </option>
-                        <small id="carError"
-                               class="invalid-feedback text-light form-text bg-danger rounded">
-                            You must select car</small>
                     </select>
+                    <small id="carError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        You must select car</small>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label for="dataIn" class="text-white font-weight-bold">Prefer service date</label>
@@ -58,16 +58,16 @@
                             th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select classification -</option>
-                        <option th:each="f: ${T(com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum).values()}"
+                        <option th:each="f: ${classificationEnum}"
                                 th:text="${f}"
                                 th:value="${f}"
                                 th:selected="${f} == *{classificationEnum}">classification
 
                         </option>
-                        <small id="classificationEnumError"
-                               class="invalid-feedback text-light form-text bg-danger rounded">
-                            You must select classification</small>
                     </select>
+                    <small id="classificationEnumError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        You must select classification</small>
                 </div>
 
                 <!--                <div class="form-group col-md-6 mb-3">-->

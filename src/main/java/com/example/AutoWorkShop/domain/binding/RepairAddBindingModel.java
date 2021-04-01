@@ -23,7 +23,6 @@ public class RepairAddBindingModel {
         return id;
     }
 
-    @NotNull
     public CarEntity getCar() {
         return car;
     }

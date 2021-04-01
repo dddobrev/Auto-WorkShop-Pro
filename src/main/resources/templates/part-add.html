@@ -31,12 +31,12 @@
                                 th:value="${mn.id}"
                                 th:selected="${mn.id} == *{manufacturer}">manufacture
                         </option>
-                        <small id="manufacturerError"
-                               class="invalid-feedback text-light form-text bg-danger rounded">
-                            You must select manufacturer</small>
-                        <small th:if="${partExist}" id="carUniqueError"
-                               class="text-light form-text bg-danger rounded">Part already exist</small>
                     </select>
+                    <small id="manufacturerError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        You must select manufacturer</small>
+                    <small th:if="${partExist}" id="carUniqueError"
+                           class="text-light form-text bg-danger rounded">Part already exist</small>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold"
@@ -52,10 +52,10 @@
                                 th:value="*{id}"
                                 th:selected="${sp.id} == ${supplier}">Supplier
                         </option>
-                        <small id="supplierError"
-                               class="invalid-feedback text-light form-text bg-danger rounded">
-                            You must select supplier</small>
                     </select>
+                    <small id="supplierError"
+                           class="invalid-feedback text-light form-text bg-danger rounded">
+                        You must select supplier</small>
                 </div>
             </div>
             <div class="row">

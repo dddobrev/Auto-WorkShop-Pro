@@ -2,8 +2,6 @@ package com.example.AutoWorkShop.domain.entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity(name = "repair_details")
 public class RepairDetail extends BaseEntity{
@@ -17,7 +15,7 @@ public class RepairDetail extends BaseEntity{
     public RepairDetail() {
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public RepairEntity getRepair() {
         return repair;
     }
@@ -37,7 +35,7 @@ public class RepairDetail extends BaseEntity{
         return price;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public AutoPartEntity getAutoParts() {
         return autoParts;
     }

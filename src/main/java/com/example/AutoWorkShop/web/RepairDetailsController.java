@@ -69,4 +69,13 @@ public class RepairDetailsController {
 
         return "redirect:/repairs/repair/car/" + id;
     }
+
+//    @GetMapping("/repair/car/details/{id}")
+//    public String repairDetailsView(@PathVariable Long id, Model model){
+//
+//
+////        model.addAttribute();
+//
+//        return "repair-view";
+//    }
 }

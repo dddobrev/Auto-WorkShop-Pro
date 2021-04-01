@@ -39,9 +39,9 @@ public class RepairDetailServiceImpl implements RepairDetailService {
                 .setPrice(repairDetailsAddServiceModel.getPrice())
                 .setRepairDescription(repairDetailsAddServiceModel.getRepairDescription())
                 .setRemarks(repairDetailsAddServiceModel.getRemarks());
-
         repairDetailRepository.save(newRepairDetail);
-
+//        repairEntity.addDetails(newRepairDetail);
+//        repairRepository.save(repairEntity);
         return newRepairDetail.getId();
     }
 
