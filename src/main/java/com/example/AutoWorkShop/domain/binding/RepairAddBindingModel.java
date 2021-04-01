@@ -23,6 +23,7 @@ public class RepairAddBindingModel {
         return id;
     }
 
+    @NotNull
     public CarEntity getCar() {
         return car;
     }
@@ -30,6 +31,7 @@ public class RepairAddBindingModel {
     public Integer getOldKm() {
         return oldKm;
     }
+
     @NotNull
     @PositiveOrZero
     public Integer getNewKm() {
