@@ -8,4 +8,6 @@ import java.util.List;
 public interface SupplierService {
     SupplierEntity findSupplierByName(String supplierName);
     List<SupplierViewModel> findAll();
+
+    void seedSuppliers();
 }

@@ -23,6 +23,25 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public void seedSuppliers() {
+        if (supplierRepository.count() == 0) {
+            SupplierEntity supplier1 = new SupplierEntity();
+            SupplierEntity supplier2 = new SupplierEntity();
+            SupplierEntity supplier3 = new SupplierEntity();
+            supplier1.setSupplierName("EURO 07")
+                    .setSupplierContactPerson("Nikolai")
+                    .setSupplierTelephone("0888123456");
+            supplier2.setSupplierName("KOSER")
+                    .setSupplierContactPerson("Tcanko")
+                    .setSupplierTelephone("0888789456");
+            supplier3.setSupplierName("AUTO PLUS")
+                    .setSupplierContactPerson("Ivan")
+                    .setSupplierTelephone("0888963888");
+            supplierRepository.saveAll(List.of(supplier1, supplier2, supplier3));
+        }
+    }
+
+    @Override
     public SupplierEntity findSupplierByName(String supplierName) {
         return this.supplierRepository
                 .findSupplierBySupplierNameContains(supplierName)
@@ -34,7 +53,9 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierRepository
                 .findAll()
                 .stream()
-                .map(sup-> modelMapper.map(sup, SupplierViewModel.class))
+                .map(sup -> modelMapper.map(sup, SupplierViewModel.class))
                 .collect(Collectors.toList());
     }
+
+
 }

@@ -1,17 +1,9 @@
 package com.example.AutoWorkShop.init;
 
-import com.example.AutoWorkShop.service.CarService;
-import com.example.AutoWorkShop.service.ClientService;
-import com.example.AutoWorkShop.service.RepairService;
-import com.example.AutoWorkShop.service.UserService;
-import com.example.AutoWorkShop.view.CarViewModel;
-import com.example.AutoWorkShop.view.ClientViewModel;
+import com.example.AutoWorkShop.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Scanner;
 
 
 @Controller
@@ -22,21 +14,29 @@ public class AutoWorkShopApplicationInit implements CommandLineRunner {
     private final RepairService repairService;
     private final UserService userService;
     private final ClientService clientService;
+    private final SupplierService supplierService;
 
 
     public AutoWorkShopApplicationInit(CarService carService,
                                        RepairService repairService,
-                                       UserService userService, ClientService clientService) {
+                                       UserService userService,
+                                       ClientService clientService,
+                                       SupplierService supplierService) {
         this.carService = carService;
         this.repairService = repairService;
         this.userService = userService;
         this.clientService = clientService;
+        this.supplierService = supplierService;
+
     }
 
     @Override
     public void run(String... args) throws Exception {
 
         userService.seedUsers();
+        supplierService.seedSuppliers();
+
+
 
 
 //        Scanner scanner = new Scanner(System.in);

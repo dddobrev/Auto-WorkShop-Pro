@@ -98,7 +98,8 @@ public class UserController {
     }
 
 //    @GetMapping("/view/{username}")
-//    public String viewUserByUsername(Model model, @AuthenticationPrincipal Principal principal,
+//    public String viewUserByUsername(Model model,
+//                                     @AuthenticationPrincipal Principal principal,
 //                                     @PathVariable String username) {
 //        username = principal.getName();
 ////        UserEntity userEntity = userService.findUserEntityByUsername(username);
