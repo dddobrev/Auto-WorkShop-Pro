@@ -1,5 +1,7 @@
 package com.example.AutoWorkShop.domain.entities;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -14,7 +16,7 @@ public class ClientEntity extends BaseEntity{
     private String firstName;
     private String secondName;
     private String telephone;
-    private Set<CarEntity> carEntities = new HashSet<>();
+//    private Set<CarEntity> carEntities = new HashSet<>();
 
     public ClientEntity() {
     }
@@ -38,10 +40,10 @@ public class ClientEntity extends BaseEntity{
         return telephone;
     }
 
-    @OneToMany(mappedBy = "client")
-    public Set<CarEntity> getCarEntities() {
-        return carEntities;
-    }
+//    @OneToMany(mappedBy = "client")
+//    public Set<CarEntity> getCarEntities() {
+//        return carEntities;
+//    }
 
     public ClientEntity setFirstName(String firstName) {
         this.firstName = firstName;
@@ -58,8 +60,8 @@ public class ClientEntity extends BaseEntity{
         return this;
     }
 
-    public ClientEntity setCarEntities(Set<CarEntity> carEntities) {
-        this.carEntities = carEntities;
-        return this;
-    }
+//    public ClientEntity setCarEntities(Set<CarEntity> carEntities) {
+//        this.carEntities = carEntities;
+//        return this;
+//    }
 }

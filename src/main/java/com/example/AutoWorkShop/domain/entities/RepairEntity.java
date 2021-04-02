@@ -3,6 +3,7 @@ package com.example.AutoWorkShop.domain.entities;
 import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.LinkedHashSet;

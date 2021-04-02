@@ -4,6 +4,7 @@ import com.example.AutoWorkShop.domain.entities.ClientEntity;
 import com.example.AutoWorkShop.domain.entities.RepairEntity;
 import com.example.AutoWorkShop.domain.entities.enums.FuelEnum;
 import com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.time.LocalDate;
 import java.util.HashSet;

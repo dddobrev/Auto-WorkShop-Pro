@@ -2,6 +2,7 @@ package com.example.AutoWorkShop.domain.entities;
 
 import com.example.AutoWorkShop.domain.entities.enums.FuelEnum;
 import com.example.AutoWorkShop.domain.entities.enums.TransmissionEnum;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,8 +28,9 @@ public class CarEntity extends BaseEntity {
     private Integer mileage;
     private Integer mileageDifferent;
     private UserEntity userEntity;
-    private Set<OrderEntity> orders = new HashSet<>();
-    private Set<RepairEntity> repairs = new LinkedHashSet<>();;
+//    private Set<OrderEntity> orders = new HashSet<>();
+    private Set<RepairEntity> repairs = new LinkedHashSet<>();
+    ;
 
     public CarEntity() {
     }
@@ -53,7 +55,7 @@ public class CarEntity extends BaseEntity {
         return model;
     }
 
-    @Column(name="coupe_model")
+    @Column(name = "coupe_model")
     public String getCoupeModel() {
         return coupeModel;
     }
@@ -103,12 +105,13 @@ public class CarEntity extends BaseEntity {
         return mileageDifferent;
     }
 
-    @OneToMany(mappedBy = "car")
-    public Set<OrderEntity> getOrders() {
-        return orders;
-    }
 
-    @OneToMany(mappedBy = "car")
+//    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
+//    public Set<OrderEntity> getOrders() {
+//        return orders;
+//    }
+
+    @OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
     public Set<RepairEntity> getRepairs() {
         return repairs;
     }
@@ -188,10 +191,10 @@ public class CarEntity extends BaseEntity {
         return this;
     }
 
-    public CarEntity setOrders(Set<OrderEntity> orders) {
-        this.orders = orders;
-        return this;
-    }
+//    public CarEntity setOrders(Set<OrderEntity> orders) {
+//        this.orders = orders;
+//        return this;
+//    }
 
     public CarEntity setRepairs(Set<RepairEntity> repairs) {
         this.repairs = repairs;

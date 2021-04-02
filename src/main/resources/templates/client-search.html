@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/fragment::head"></head>
 <body>
 <header th:replace="fragments/fragment::navbar"></header>
@@ -44,7 +45,39 @@
                 </div>
             </div>
         </form>
+        <!--        searchBar-->
+        <div class="container d-flex flex-column justify-content-center">
+            <div class="m-5 col-sm-8 my-auto align-self-center">
+                <input id="searchInput" class="form-control mr-sm-2 w-50" type="search"
+                       placeholder="Enter phone or First name for fast search" aria-label="Search">
+            </div>
+        </div>
+        <!--        searchBar-->
+        <div class="row">
+            <div class="row container" id="clientList">
+<!--                client view-->
+                <table class="table text-white">
+                    <thead>
+                    <tr class="my-main text-white">
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Telephone number</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-white">
+                    <tr class="my-main text-white">
+                        <td class="text-white"></td>
+                        <td class="text-white"></td>
+                        <td class="text-white"></td>
+                    </tr>
+                    </tbody>
+                </table>
+<!--                client view-->
+            </div>
+        </div>
     </div>
 </main>
+<footer th:replace="fragments/fragment::footer"></footer>
+<script th:src="@{js/search-bar.js}"></script>
 </body>
 </html>

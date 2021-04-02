@@ -1,52 +1,52 @@
-$(".icon-search").click(function() {
-    var searchstring  = $(this).text('#searchfield');// $('#searchfield');
-    searchstring.focus();
-    $('#searchBox').html($('input:searchfield').val());
-    alert("searchfield.  " + searchstring +  " hahah");
-});
-
-function editAddRowLecturer(rowID,firstname,lastname,
-                            // abbr,type,comment,
-                            // cloneRow
-){
-    let lecturerId = +rowID;
-    let lecturerFirstName = firstname===""?" ":firstname;
-    let lecturerLastName = lastname;
+// $(".icon-search").click(function() {
+//     var searchstring  = $(this).text('#searchfield');// $('#searchfield');
+//     searchstring.focus();
+//     $('#searchBox').html($('input:searchfield').val());
+//     alert("searchfield.  " + searchstring +  " hahah");
+// });
+//
+// function editAddRowLecturer(rowID,firstname,lastname,
+//                             // abbr,type,comment,
+//                             // cloneRow
+// ){
+//     let lecturerId = +rowID;
+//     let lecturerFirstName = firstname===""?" ":firstname;
+//     let lecturerLastName = lastname;
     // let lecturerAbbr = abbr;
     // let lecturerType = type===""?" ":type;
     // let lecturerComment = comment===""?" ":comment;
 
     //Nach Pflichtfelder prüfen
-    if(lecturerLastName!=="" && lecturerAbbr!==""){
-        let optionValueListType = $( "#selectListType").val();
-        let optionValueListYear = $("#selectListYear").val();
-        $.ajax({
-            type: "get",
-            url: "client/search",
-            data: {
-                "clientID":lecturerId,
-                "lecturerFirstName":lecturerFirstName,
-                "lecturerLastName":lecturerLastName,
+    // if(lecturerLastName!=="" && lecturerAbbr!==""){
+    //     let optionValueListType = $( "#selectListType").val();
+    //     let optionValueListYear = $("#selectListYear").val();
+    //     $.ajax({
+    //         type: "get",
+    //         url: "client/search",
+    //         data: {
+    //             "clientID":lecturerId,
+    //             "lecturerFirstName":lecturerFirstName,
+    //             "lecturerLastName":lecturerLastName,
                 // "lecturerAbbr":lecturerAbbr,
                 // "lecturerType":lecturerType,
                 // "lecturerComment":lecturerComment,
-                "cloneRow":cloneRow
-            },
-            success: function(){
-                sessionStorage.setItem("reloading","true");
-                sessionStorage.setItem("optionValueListType",optionValueListType);
-                sessionStorage.setItem("optionValueListYear",optionValueListYear);
-                location.reload(true);
-            }
-        });
-    }else{
-        checkInputFieldsIfEmpty('#basicModalAddEditLecturer');
-    }
-}
+//                 "cloneRow":cloneRow
+//             },
+//             success: function(){
+//                 sessionStorage.setItem("reloading","true");
+//                 sessionStorage.setItem("optionValueListType",optionValueListType);
+//                 sessionStorage.setItem("optionValueListYear",optionValueListYear);
+//                 location.reload(true);
+//             }
+//         });
+//     }else{
+//         checkInputFieldsIfEmpty('#basicModalAddEditLecturer');
+//     }
+// }
 
 
 
-$("#myModal.modal-body #type").val(lecturerType);
+// $("#myModal.modal-body #type").val(lecturerType);
 // $("#myModal .modal-body #comment").val(lecturerComment);
 
 

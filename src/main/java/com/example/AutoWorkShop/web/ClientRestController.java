@@ -1,16 +1,16 @@
 package com.example.AutoWorkShop.web;
 
-import com.example.AutoWorkShop.domain.service.ClientAddServiceModel;
 import com.example.AutoWorkShop.service.ClientService;
 import com.example.AutoWorkShop.view.ClientViewModel;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/clients")
+@RestController
 public class ClientRestController {
 
     private final ClientService clientService;
@@ -25,7 +25,7 @@ public class ClientRestController {
         return clientByTelephoneNumber;
     }
 
-    @GetMapping("/search/all")
+    @GetMapping("/search/all/api")
     public List<ClientViewModel> getAll() {
         return clientService.findAll();
     }

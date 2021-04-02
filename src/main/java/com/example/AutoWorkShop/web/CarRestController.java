@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
 @RequestMapping("/car")
+@RestController
 public class CarRestController {
 
     private final CarRepository carRepository;
@@ -24,23 +24,23 @@ public class CarRestController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/api")
-    public ResponseEntity<List<CarEntity>> findAll() {
-        List<CarViewModelWithRepairs> carViewModelWithRepairs =
-                carRepository
-                        .findAll()
-                        .stream()
-                        .map(car -> {
-                            CarViewModelWithRepairs carViewModelWithRepair =
-                                    modelMapper.map(car, CarViewModelWithRepairs.class);
-                            carViewModelWithRepair.setClientEntity(car.getClient());
-                            return carViewModelWithRepair;
-                        })
-                        .collect(Collectors.toList());
-
-
-        return ResponseEntity
-                .ok()
-                .body(carRepository.findAll());
-    }
+//    @GetMapping("/api")
+//    public ResponseEntity<List<CarEntity>> findAll() {
+//        List<CarViewModelWithRepairs> carViewModelWithRepairs =
+//                carRepository
+//                        .findAll()
+//                        .stream()
+//                        .map(car -> {
+//                            CarViewModelWithRepairs carViewModelWithRepair =
+//                                    modelMapper.map(car, CarViewModelWithRepairs.class);
+//                            carViewModelWithRepair.setClientEntity(car.getClient());
+//                            return carViewModelWithRepair;
+//                        })
+//                        .collect(Collectors.toList());
+//
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(carRepository.findAll());
+//    }
 }

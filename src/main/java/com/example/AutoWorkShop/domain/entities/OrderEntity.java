@@ -2,6 +2,7 @@ package com.example.AutoWorkShop.domain.entities;
 
 import com.example.AutoWorkShop.domain.entities.enums.ClassificationEnum;
 import com.example.AutoWorkShop.domain.entities.enums.ProgressEnum;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
