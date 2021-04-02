@@ -28,7 +28,6 @@ const displayClient = (clients) => {
         .map((cl) => {
             return `<table class="table text-white">
 
-                <p class="card-text border-bottom ">Name: ${cl.firstName}</p>
                 <thead>
                 <tr class="my-main text-white">
                     <th scope="col">First name</th>
