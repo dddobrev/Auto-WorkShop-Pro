@@ -3,15 +3,15 @@ const searchBar = document.getElementById('searchInput')
 
 const allClients = [];
 
-fetch("http://localhost:8080/clients/search/all/api")
+fetch("http://localhost:8080/clients/search/api")
     .then(response => response.json())
     .then(data => {
         for (let client of data) {
-            clientList.push(client);
+            allClients.push(client);
         }
     })
 
-console.log(clientList);
+console.log(allClients);
 
 searchBar.addEventListener('keyup', (e) => {
     const searchingCharacters = searchBar.value.toLowerCase();
@@ -26,11 +26,11 @@ searchBar.addEventListener('keyup', (e) => {
 const displayClient = (clients) => {
     clientList.innerHTML = clients
         .map((cl) => {
-            return `<table className="table text-white">
+            return `<table class="table text-white">
 
                 <p class="card-text border-bottom ">Name: ${cl.firstName}</p>
                 <thead>
-                <tr className="my-main text-white">
+                <tr class="my-main text-white">
                     <th scope="col">First name</th>
                     <th scope="col">Last name</th>
                     <th scope="col">Telephone number</th>

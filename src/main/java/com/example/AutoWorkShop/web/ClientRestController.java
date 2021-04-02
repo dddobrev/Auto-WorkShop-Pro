@@ -2,10 +2,8 @@ package com.example.AutoWorkShop.web;
 
 import com.example.AutoWorkShop.service.ClientService;
 import com.example.AutoWorkShop.view.ClientViewModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,15 +17,15 @@ public class ClientRestController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/search/phone")
-    public List<ClientViewModel> clientViewModel(String phone) {
-        List<ClientViewModel> clientByTelephoneNumber = clientService.findClientByTelephone(phone);
-        return clientByTelephoneNumber;
-    }
+//    @GetMapping("/search/phone")
+//    public List<ClientViewModel> clientViewModel(String phone) {
+//        List<ClientViewModel> clientByTelephoneNumber = clientService.findClientByTelephone(phone);
+//        return clientByTelephoneNumber;
+//    }
 
-    @GetMapping("/search/all/api")
-    public List<ClientViewModel> getAll() {
-        return clientService.findAll();
+    @GetMapping("/search/api")
+    public ResponseEntity<List<ClientViewModel>> getAll() {
+        return ResponseEntity.ok().body(clientService.findAll());
     }
 
 //    @PostMapping("/create")
@@ -44,10 +42,10 @@ public class ClientRestController {
 //        ).build();
 //
 //    }
-
-    @GetMapping("/search/{id}")
-    public ClientViewModel getById(@PathVariable Long id) {
-        return clientService.findClientById(id);
-    }
+//
+//    @GetMapping("/search/{id}")
+//    public ClientViewModel getById(@PathVariable Long id) {
+//        return clientService.findClientById(id);
+//    }
 
 }
