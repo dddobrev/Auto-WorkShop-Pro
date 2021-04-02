@@ -164,12 +164,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UserEditServiceModel userEditServiceModel) {
-        UserEntity userEntity = userRepository
+        UserEntity updatedUserEntity = userRepository
                 .findById(userEditServiceModel.getId())
                 .orElse(null);
-        userEntity.setFirstName(userEditServiceModel.getFirstName())
+        updatedUserEntity.setFirstName(userEditServiceModel.getFirstName())
                 .setLastName(userEditServiceModel.getLastName())
                 .setEmail(userEditServiceModel.getEmail());
-        userRepository.save(userEntity);
+        userRepository.save(updatedUserEntity);
     }
 }

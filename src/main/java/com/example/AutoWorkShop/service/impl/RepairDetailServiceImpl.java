@@ -1,7 +1,6 @@
 package com.example.AutoWorkShop.service.impl;
 
 import com.example.AutoWorkShop.domain.entities.RepairDetail;
-import com.example.AutoWorkShop.domain.entities.RepairEntity;
 import com.example.AutoWorkShop.domain.service.RepairDetailsAddServiceModel;
 import com.example.AutoWorkShop.repository.RepairDetailRepository;
 import com.example.AutoWorkShop.repository.RepairRepository;
@@ -10,8 +9,6 @@ import com.example.AutoWorkShop.view.RepairDetailsViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -49,12 +46,12 @@ public class RepairDetailServiceImpl implements RepairDetailService {
         return newRepairDetail.getId();
     }
 
-    @Override
-    public List<RepairDetailsViewModel> findAllByRepairId(Long id) {
-        //todo implement
-
-        return null;
-    }
+//    @Override
+//    public List<RepairDetailsViewModel> findAllByRepairId(Long id) {
+//        //todo implement
+//
+//        return null;
+//    }
 
     @Override
     public RepairDetailsViewModel findById(Long id) {

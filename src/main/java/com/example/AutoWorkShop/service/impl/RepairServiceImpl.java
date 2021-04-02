@@ -109,7 +109,6 @@ public class RepairServiceImpl implements RepairService {
                 findByUsername(newRepair.getUserEntity()).orElse(null);
 
         CarEntity carEntity = carService.findCarEntityById(id);
-        System.out.println();
         newRepairEntity.setUserEntity(username)
                 .setCar(carEntity)
                 .setClassificationEnum(newRepair.getClassificationEnum())

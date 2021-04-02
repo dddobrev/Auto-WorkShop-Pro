@@ -26,7 +26,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public ManufactureViewModel findManufacturerByName(String name) {
-        // Todo findManufacturerByName
         return manufacturerRepository
                 .findManufacturerEntityByManufacturerName(name)
                 .map(man -> modelMapper.map(man, ManufactureViewModel.class))
