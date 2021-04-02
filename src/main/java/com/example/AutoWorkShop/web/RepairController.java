@@ -136,7 +136,6 @@ public class RepairController {
             model.addAttribute("notRepair", true);
         }
         ClientEntity clientEntity = carViewModelWithRepairs.getClientEntity();
-        System.out.println();
         if (clientEntity == null) {
             model.addAttribute("notClient", true);
         }

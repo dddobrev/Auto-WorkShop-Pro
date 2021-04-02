@@ -46,6 +46,8 @@
                 <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
                 <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
                 <a class="ml-3 text-warning text-center" th:href="@{/cars/view/{id}(id=${car.id})}">car details</a>
+                <a class="ml-3 text-warning text-center" th:href="@{/repairs/car/details/all/{id}(id=${car.id})}">all
+                    repairs</a>
             </td>
         </tr>
         </tbody>
@@ -67,7 +69,7 @@
         </thead>
         <tbody>
         <tr class="my-main text-white mt-auto"
-            th:object="${repair}" >
+            th:object="${repair}">
             <th th:text="1" scope="row">1</th>
             <td th:text="*{dataInGarage}"></td>
             <td th:text="*{newKm}"></td>
@@ -75,7 +77,8 @@
             <td>
                 <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
                 <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
-                <a class="ml-3 text-warning text-center" th:href="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}">add details</a>
+                <a class="ml-3 text-warning text-center"
+                   th:href="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}">add details</a>
             </td>
         </tr>
         </tbody>
@@ -90,31 +93,29 @@
             <th scope="col">part brand</th>
             <th scope="col">part N</th>
             <th scope="col">part OE N</th>
-            <th scope="col" >description</th>
-            <th scope="col" >remarks</th>
-            <th scope="col" >action</th>
+            <th scope="col">description</th>
+            <th scope="col">remarks</th>
+            <th scope="col">action</th>
         </tr>
         </thead>
         <tbody>
         <tr class="my-main text-white mt-auto"
-            th:each="rep, iter: ${repairDetails}" th:object="${rep}" >
+            th:each="rep, iter: ${repairDetails}" th:object="${rep}">
             <th th:text="${iter.index} + 1" scope="row">#</th>
-            <td th:text="${rep.autoParts.manufacturer.manufacturerName}">part brand</td>
+            <td th:text="${rep.autoParts.manufacturer.manufacturerName}" th:class="${rep.autoParts.manufacturer.manufacturerName}">part brand</td>
             <td th:text="${rep.autoParts.partNumber}">part N</td>
             <td th:text="${rep.autoParts.partOeNumber}">part OE N</td>
-<!--            <td th:if="${rep.autoParts.partOeNumber.isBlank()}" th:text="N/A">part OE N</td>-->
-            <td th:text="${rep.repairDescription}">description</td>
-            <td th:text="${rep.remarks}">remarks</td>
+            <!--            <td th:if="${rep.autoParts.partOeNumber.isBlank()}" th:text="N/A">part OE N</td>-->
+            <td th:text="${rep.repairDescription}" th:class="${rep.repairDescription}">description</td>
+            <td th:text="${rep.remarks}" th:class="${rep.remarks}">remarks</td>
             <td>
                 <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center"-->
                 <!--                   th:href="@{/repairs/edit/{id}(id=*{id})}">progress</a>-->
-<!--                <a class="ml-3 text-warning text-center" th:href="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}">add details</a>-->
+                <!--                <a class="ml-3 text-warning text-center" th:href="@{/repairs/repair/car/details/add/{id}(id=${repair.id})}">add details</a>-->
             </td>
         </tr>
         </tbody>
     </table>
-
-
 
 
     <!--    <form th:action="@{/orders/search}">-->
