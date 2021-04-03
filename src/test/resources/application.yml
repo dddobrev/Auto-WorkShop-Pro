@@ -1,0 +1,24 @@
+spring:
+  carousel:
+    images: admin.jpg, motul-motors1.jpg, motul-motors-org.jpg
+    refresh-cron: 0 */10 * * * *
+  #    datasource:
+  #        driverClassName: com.mysql.cj.jdbc.Driver
+  #        password: root
+  #        url: jdbc:mysql://localhost:3306/auto_workshop_test?createDatabaseIfNotExist=TRUE&serverTimezone=Europe/Sofia
+  #        username: root
+
+  jpa:
+    #For H2 Database
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
