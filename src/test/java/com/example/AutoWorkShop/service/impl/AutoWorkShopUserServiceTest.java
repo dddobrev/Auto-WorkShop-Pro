@@ -34,7 +34,7 @@ public class AutoWorkShopUserServiceTest {
     }
 
     @Test
-    void testUserNotFound() {
+    public void testUserNotFound() {
         Assertions.assertThrows(
                 UsernameNotFoundException.class, () -> {
                     serviceToTest.loadUserByUsername("user_not_found");
@@ -43,7 +43,7 @@ public class AutoWorkShopUserServiceTest {
     }
 
     @Test
-    void testExistingUser() {
+    public void testExistingUser() {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername("mitko");
         userEntity.setPassword("123456");
