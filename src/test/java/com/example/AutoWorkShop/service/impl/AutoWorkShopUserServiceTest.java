@@ -15,12 +15,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @ExtendWith(MockitoExtension.class)
+@Transactional
 public class AutoWorkShopUserServiceTest {
 
     private AutoWorkShopUserService serviceToTest;
@@ -34,7 +36,7 @@ public class AutoWorkShopUserServiceTest {
     }
 
     @Test
-    public void testUserNotFound() {
+    void testUserNotFound() {
         Assertions.assertThrows(
                 UsernameNotFoundException.class, () -> {
                     serviceToTest.loadUserByUsername("user_not_found");
@@ -43,7 +45,7 @@ public class AutoWorkShopUserServiceTest {
     }
 
     @Test
-    public void testExistingUser() {
+    void testExistingUser() {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername("mitko");
         userEntity.setPassword("123456");

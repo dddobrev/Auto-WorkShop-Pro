@@ -33,7 +33,7 @@ public class UserServiceImplTest {
 
     @Mock
     UserRoleRepository userRoleRepository;
-    @Autowired
+    @Mock
     UserRepository mockedUserRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -47,7 +47,7 @@ public class UserServiceImplTest {
     AutoWorkShopUserService userSecurity;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         admin = new UserRoleEntity();
         admin.setRole(UserRoleEnum.ADMIN);
         user = new UserRoleEntity();
@@ -63,7 +63,7 @@ public class UserServiceImplTest {
 
 
     @Test
-   void getAllUsers() {
+    void getAllUsers() {
         Mockito.when(mockedUserRepository.findAll()).thenReturn(List.of(mitko, dido));
         List<String> allFindUsers = serviceToTest.getAllUsersNames();
         assertEquals(allFindUsers.get(0), dido.getUsername());
