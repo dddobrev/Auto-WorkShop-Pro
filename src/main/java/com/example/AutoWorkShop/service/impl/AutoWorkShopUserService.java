@@ -24,7 +24,7 @@ public class AutoWorkShopUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username)
+        com.example.AutoWorkShop.domain.entities.UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with this name " + username + " was not found"));
 
         return mapToUserDetails(userEntity);
