@@ -34,5 +34,5 @@ public interface CarService {
 
     CarEntity findCarEntityById(Long id);
 
-    void updateClient(CarAddServiceModel updatedCar);
+    void updateCar(CarAddServiceModel updatedCar);
 }

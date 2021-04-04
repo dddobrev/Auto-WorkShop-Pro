@@ -146,7 +146,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateClient(CarAddServiceModel updatedCar) {
+    public void updateCar(CarAddServiceModel updatedCar) {
         CarEntity updatedNewCar = carRepository
                 .findCarById(updatedCar.getId())
                 .orElseThrow(IllegalArgumentException::new);

@@ -180,7 +180,7 @@ public class CarController {
 
         CarAddServiceModel updatedCar = modelMapper
                 .map(carAddBindingModel, CarAddServiceModel.class);
-        carService.updateClient(updatedCar);
+        carService.updateCar(updatedCar);
 
         return "redirect:/cars/view/" + id;
     }
