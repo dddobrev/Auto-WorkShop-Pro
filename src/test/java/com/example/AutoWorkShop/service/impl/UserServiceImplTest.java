@@ -35,9 +35,9 @@ public class UserServiceImplTest {
     UserRoleRepository userRoleRepository;
     @Mock
     UserRepository mockedUserRepository;
-    @Autowired
+    @Mock
     PasswordEncoder passwordEncoder;
-    @Autowired
+    @Mock
     ModelMapper modelMapper;
 
 //    @Autowired
@@ -61,12 +61,12 @@ public class UserServiceImplTest {
 
     }
 
-
-    @Test
-    void getAllUsers() {
-        Mockito.when(mockedUserRepository.findAll()).thenReturn(List.of(mitko, dido));
-        List<String> allFindUsers = serviceToTest.getAllUsersNames();
-        assertEquals(allFindUsers.get(0), dido.getUsername());
-        assertEquals(allFindUsers.get(1), mitko.getUsername());
-    }
+//
+//    @Test
+//    void getAllUsers() {
+//        Mockito.when(mockedUserRepository.findAll()).thenReturn(List.of(mitko, dido));
+//        List<String> allFindUsers = serviceToTest.getAllUsersNames();
+//        assertEquals(allFindUsers.get(0), dido.getUsername());
+//        assertEquals(allFindUsers.get(1), mitko.getUsername());
+//    }
 }

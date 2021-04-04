@@ -4,9 +4,11 @@ import com.example.AutoWorkShop.domain.entities.UserEntity;
 import com.example.AutoWorkShop.domain.entities.UserRoleEntity;
 import com.example.AutoWorkShop.domain.entities.enums.UserRoleEnum;
 import com.example.AutoWorkShop.repository.UserRepository;
-import org.junit.Test;
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -15,14 +17,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 @ExtendWith(MockitoExtension.class)
-@Transactional
 public class AutoWorkShopUserServiceTest {
 
     private AutoWorkShopUserService serviceToTest;
