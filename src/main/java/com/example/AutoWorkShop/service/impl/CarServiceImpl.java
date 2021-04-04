@@ -151,6 +151,7 @@ public class CarServiceImpl implements CarService {
                 .findCarById(updatedCar.getId())
                 .orElseThrow(IllegalArgumentException::new);
         setCar(updatedCar, updatedNewCar);
+//        carRepository.save(updatedNewCar);
 
     }
 
@@ -175,6 +176,7 @@ public class CarServiceImpl implements CarService {
     private void setCar(CarAddServiceModel updatedCar, CarEntity updatedNewCar) {
         updatedNewCar.setBrand(updatedCar.getBrand().toUpperCase().trim())
                 .setModel(updatedCar.getModel().toUpperCase().trim())
+                .setCoupeModel(updatedCar.getCoupeModel().toUpperCase().trim())
                 .setRegNumber(updatedCar.getRegNumber().toUpperCase().trim())
                 .setVin(updatedCar.getVin().toUpperCase().trim())
                 .setEngine(updatedCar.getEngine().toUpperCase().trim())
