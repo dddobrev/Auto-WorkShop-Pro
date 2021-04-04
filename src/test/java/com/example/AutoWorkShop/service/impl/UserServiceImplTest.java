@@ -16,8 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,4 +69,20 @@ public class UserServiceImplTest {
         assertEquals(allFindUsers.get(0), mitko.getUsername());
         assertEquals(allFindUsers.get(1), dido.getUsername());
     }
+
+    @Test
+    void userNameExistsTest() {
+
+        Mockito.when(mockedUserRepository.findByUsername("mitko")).thenReturn(Optional.of(mitko));
+        boolean current = serviceToTest.userNameExists("mitko");
+        assertTrue(current);
+    }
+
+    @Test
+    void userNameNotExistsTest() {
+        Mockito.when(mockedUserRepository.findByUsername("mitko")).thenReturn(Optional.empty());
+        boolean current = serviceToTest.userNameExists("mitko");
+        assertFalse(current);
+    }
+
 }
