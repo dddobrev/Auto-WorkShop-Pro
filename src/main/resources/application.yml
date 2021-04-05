@@ -5,7 +5,7 @@ logging:
         org.hibernate.SQL: DEBUG
 spring:
     carousel:
-        images: admin.jpg, motul-motors1.jpg, motul-motors-org.jpg
+        images: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg
         refresh-cron: 0 */10 * * * *
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver

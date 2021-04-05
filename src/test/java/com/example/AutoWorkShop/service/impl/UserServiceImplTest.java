@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@Transactional
 public class UserServiceImplTest {
 
     UserServiceImpl serviceToTest;
@@ -48,7 +47,7 @@ public class UserServiceImplTest {
     AutoWorkShopUserService userSecurity;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         admin = new UserRoleEntity();
         admin.setRole(UserRoleEnum.ADMIN);
         user = new UserRoleEntity();

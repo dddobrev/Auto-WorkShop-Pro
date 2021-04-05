@@ -22,3 +22,6 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+        carousel:
+          images: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg
+          refresh-cron: 0 */10 * * * *
