@@ -15,7 +15,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +38,6 @@ public class UserServiceImplTest {
     PasswordEncoder passwordEncoder;
     @Mock
     ModelMapper modelMapper;
-
-//    @Autowired
-//    AutoWorkShopUserService userSecurity;
 
     @Mock
     AutoWorkShopUserService userSecurity;

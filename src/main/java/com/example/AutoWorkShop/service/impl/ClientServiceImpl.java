@@ -72,14 +72,14 @@ public class ClientServiceImpl implements ClientService {
         return collect;
     }
 
-    @Override
-    public ClientViewModel findClientByTelephoneNumber(String telephone) {
-        return clientRepository
-                .findByTelephoneContains(telephone)
-                .map(cl -> modelMapper.map(cl, ClientViewModel.class))
-                .orElseThrow(IllegalArgumentException::new);
-
-    }
+//    @Override
+//    public ClientViewModel findClientByTelephoneNumber(String telephone) {
+//        return clientRepository
+//                .findByTelephoneContains(telephone)
+//                .map(cl -> modelMapper.map(cl, ClientViewModel.class))
+//                .orElseThrow(IllegalArgumentException::new);
+//
+//    }
 
     @Override
     public ClientViewModel findClientById(Long id) {

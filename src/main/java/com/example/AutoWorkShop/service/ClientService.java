@@ -16,7 +16,7 @@ public interface ClientService {
 
     List<ClientViewModel> findClientByTelephone(String telephone);
 
-    ClientViewModel findClientByTelephoneNumber(String telephone);
+//    ClientViewModel findClientByTelephoneNumber(String telephone);
 
     ClientViewModel findClientById(Long id);
 
