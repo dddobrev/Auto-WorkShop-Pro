@@ -27,7 +27,7 @@ public interface UserService {
 
     UserViewModel findById(Long id);
 
-    UserEntity findUserEntityByUsername(String username);
+//    UserEntity findUserEntityByUsername(String username);
 
-    void updateUser(UserEditServiceModel userEditServiceModel);
+    void updateUser(UserEditServiceModel userEditServiceModel, String principalName);
 }

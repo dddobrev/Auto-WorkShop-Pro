@@ -2,17 +2,12 @@ package com.example.AutoWorkShop.domain.service;
 
 public class UserEditServiceModel {
 
-    private Long id;
     private String email;
     private String firstName;
     private String lastName;
     private String imageUrl;
 
     public UserEditServiceModel() {
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getEmail() {
@@ -29,11 +24,6 @@ public class UserEditServiceModel {
 
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    public UserEditServiceModel setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public UserEditServiceModel setEmail(String email) {

@@ -90,58 +90,91 @@ public class UserController {
     @GetMapping("/view")
     public String viewUser(Model model, @AuthenticationPrincipal Principal principal) {
         String username = principal.getName();
-        UserEntity userEntity = userService.findUserEntityByUsername(username);
         UserViewModel userViewModel = userService.findUserViewByUsername(username);
         model.addAttribute("userView", userViewModel);
-        model.addAttribute("id", userEntity.getId());
         return "user-view";
     }
 
-//    @GetMapping("/view/{username}")
-//    public String viewUserByUsername(Model model,
-//                                     @AuthenticationPrincipal Principal principal,
-//                                     @PathVariable String username) {
-//        username = principal.getName();
-////        UserEntity userEntity = userService.findUserEntityByUsername(username);
-//        UserViewModel userViewModel = userService.findUserViewByUsername(username);
-//        model.addAttribute("userView", userViewModel);
-////        model.addAttribute("id", userEntity.getId());
-//        return "user-view";
-//    }
+    @GetMapping("/edit/{username}")
+    public String viewUserByUsername(Model model,
+                                     @AuthenticationPrincipal Principal principal,
+                                     @PathVariable String username) {
 
-    @GetMapping("/edit/{id}")
-    public String editUser(Model model,
-                           @AuthenticationPrincipal Principal principal,
-                           @PathVariable Long id) {
-        String username = principal.getName();
-        UserViewModel byId = userService.findById(id);
+        String principalName = principal.getName();
         UserViewModel userViewModel = userService.findUserViewByUsername(username);
-        if (byId.getUsername().equals(username)) {
+        model.addAttribute("userView", userViewModel);
+        if (principalName.equals(username)) {
             model.addAttribute("userEditBindingModel", new UserEditBindingModel());
             model.addAttribute("userView", userViewModel);
-            model.addAttribute("id", id);
+            model.addAttribute("username", principalName);
         } else {
             model.addAttribute("notAuthorize", true);
         }
+
         return "user-edit";
     }
 
-    @PatchMapping("/edit/{id}")
-    public String editUser(@PathVariable Long id,
+    @PatchMapping("/edit/{username}")
+    public String editUser(@PathVariable String username,
                            @Valid UserEditBindingModel userEditBindingModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes,
-                           @AuthenticationPrincipal Principal principal) {
+                           @AuthenticationPrincipal Principal principal,
+                           Model model) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("clientAddBindingModel", userEditBindingModel);
+            redirectAttributes.addFlashAttribute("userEditBindingModel", userEditBindingModel);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
-            return "redirect:/users/edit/{id}";
+
+            return "redirect:/users/edit/{username}";
         }
+
+        String principalName = principal.getName();
         UserEditServiceModel userEditServiceModel = modelMapper
                 .map(userEditBindingModel, UserEditServiceModel.class);
-        userService.updateUser(userEditServiceModel);
+        if (principalName.equals(username.trim())) {
+            userService.updateUser(userEditServiceModel, principalName);
+        } else {
+            model.addAttribute("notAuthorize", true);
+        }
 
         return "redirect:/users/view";
     }
+
+//    @GetMapping("/edit/{id}")
+//    public String editUser(Model model,
+//                           @AuthenticationPrincipal Principal principal,
+//                           @PathVariable Long id) {
+//        String username = principal.getName();
+//        UserViewModel byId = userService.findById(id);
+//        UserViewModel userViewModel = userService.findUserViewByUsername(username);
+//        if (byId.getUsername().equals(username)) {
+//            model.addAttribute("userEditBindingModel", new UserEditBindingModel());
+//            model.addAttribute("userView", userViewModel);
+//            model.addAttribute("id", id);
+//        } else {
+//            model.addAttribute("notAuthorize", true);
+//        }
+//        return "user-edit";
+//    }
+
+    //    @PatchMapping("/edit/{id}")
+//    public String editUser(@PathVariable Long id,
+//                           @Valid UserEditBindingModel userEditBindingModel,
+//                           BindingResult bindingResult,
+//                           RedirectAttributes redirectAttributes,
+//                           @AuthenticationPrincipal Principal principal) {
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("clientAddBindingModel", userEditBindingModel);
+//            redirectAttributes.addFlashAttribute(
+//                    "org.springframework.validation.BindingResult.userEditBindingModel", bindingResult);
+//            return "redirect:/users/edit/{id}";
+//        }
+//        UserEditServiceModel userEditServiceModel = modelMapper
+//                .map(userEditBindingModel, UserEditServiceModel.class);
+//        userService.updateUser(userEditServiceModel);
+//
+//        return "redirect:/users/view";
+//    }
+//
 }

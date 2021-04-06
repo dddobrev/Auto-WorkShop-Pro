@@ -6,7 +6,6 @@ import javax.validation.constraints.Size;
 
 public class UserEditBindingModel {
 
-    private Long id;
     private String email;
     private String firstName;
     private String lastName;
@@ -15,17 +14,13 @@ public class UserEditBindingModel {
     public UserEditBindingModel() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    @NotEmpty
-    @Email
+    @NotEmpty(message = "You must input e-mail")
+    @Email(message = "You must input valid e-mail")
     public String getEmail() {
         return email;
     }
 
-    @NotEmpty
+    @NotEmpty(message = "First name must be more then 2 characters")
     @Size(min = 2)
     public String getFirstName() {
         return firstName;
@@ -39,10 +34,6 @@ public class UserEditBindingModel {
         return imageUrl;
     }
 
-    public UserEditBindingModel setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public UserEditBindingModel setEmail(String email) {
         this.email = email;

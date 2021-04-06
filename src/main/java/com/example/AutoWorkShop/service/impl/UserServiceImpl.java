@@ -104,6 +104,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String findUserByUsername(String username) {
         UserEntity userEntity = userRepository.findByUsername(username).orElse(null);
+        assert userEntity != null;
         return userEntity.getUsername();
     }
 
@@ -151,25 +152,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserViewModel findById(Long id) {
         return userRepository.findById(id)
-                .map(user-> modelMapper.map(user, UserViewModel.class))
+                .map(user -> modelMapper.map(user, UserViewModel.class))
                 .orElse(null);
     }
 
-    @Override
-    public UserEntity findUserEntityByUsername(String username) {
-        return userRepository
-                .findByUsername(username)
-                .orElse(null);
-    }
+//    @Override
+//    public UserEntity findUserEntityByUsername(String username) {
+//        return userRepository
+//                .findByUsername(username)
+//                .orElse(null);
+//    }
 
     @Override
-    public void updateUser(UserEditServiceModel userEditServiceModel) {
+    public void updateUser(UserEditServiceModel userEditServiceModel, String principalName) {
         UserEntity updatedUserEntity = userRepository
-                .findById(userEditServiceModel.getId())
+                .findByUsername(principalName)
                 .orElse(null);
-        updatedUserEntity.setFirstName(userEditServiceModel.getFirstName())
-                .setLastName(userEditServiceModel.getLastName())
-                .setEmail(userEditServiceModel.getEmail());
+        assert updatedUserEntity != null;
+        if (updatedUserEntity.getUsername().equalsIgnoreCase(principalName))
+            updatedUserEntity
+                    .setFirstName(userEditServiceModel.getFirstName())
+                    .setLastName(userEditServiceModel.getLastName())
+                    .setEmail(userEditServiceModel.getEmail());
         userRepository.save(updatedUserEntity);
     }
 }

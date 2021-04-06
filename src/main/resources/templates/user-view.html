@@ -21,7 +21,7 @@
     <table class="table text-white">
         <thead>
         <tr class="my-main text-white">
-            <th scope="col">#</th>
+<!--            <th scope="col">#</th>-->
             <th scope="col">First name</th>
             <th scope="col">Last name</th>
             <th scope="col">e-mail</th>
@@ -30,12 +30,13 @@
         </thead>
         <tbody   class="text-white">
         <tr th:object="${userView}">
-            <th th:text="${1}" scope="row">1</th>
+<!--            <th th:text="${1}" scope="row">1</th>-->
             <td th:text="*{firstName}"></td>
             <td th:text="*{lastName}"></td>
             <td th:text="*{email}"></td>>
             <td>
-                <a class="ml-3 text-warning text-center" th:href="@{/users/edit/{id}(id=${id})}">edit</a>
+<!--                <a class="ml-3 text-warning text-center" th:href="@{/users/edit/{id}(id=${id})}">edit</a>-->
+                <a class="ml-3 text-warning text-center" th:href="@{/users/edit/{username}(username=${userView.username})}">edit</a>
                 <!--                <a sec:authorize="hasRole('ROLE_ADMIN')" class="ml-3 text-warning text-center" th:href="@{/cars/search/}">car add</a>-->
             </td>
         </tr>
