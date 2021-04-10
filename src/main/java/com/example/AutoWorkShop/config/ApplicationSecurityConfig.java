@@ -32,7 +32,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/js/**", "/css/**", "/images/**")
                 .permitAll()
                 .antMatchers("/", "/users/login/**", "/users/register/**")
-                .permitAll()
+                .anonymous()
                 .antMatchers("/orders/search/user/**", "/orders/add/**", "/cars/**", "/users/**", "/home/**")
                 .hasRole("USER")
                 .antMatchers("/**").hasRole("ADMIN")
