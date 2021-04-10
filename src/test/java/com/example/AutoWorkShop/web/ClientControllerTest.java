@@ -33,11 +33,9 @@ public class ClientControllerTest {
     @Autowired
     private ClientRepository clientRepository;
 
-//    private ClientTestData clientTestData;
 
     @BeforeEach
     public void setUp() {
-//        clientTestData = new ClientTestData;
         this.init();
     }
 
