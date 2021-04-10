@@ -1,7 +1,7 @@
 spring:
-  carousel:
-    images: admin.jpg, motul-motors1.jpg, motul-motors-org.jpg
-    refresh-cron: 0 */10 * * * *
+#  carousel:
+#    images: admin.jpg, motul-motors1.jpg, motul-motors-org.jpg
+#    refresh-cron: 0 */10 * * * *
   #    datasource:
   #        driverClassName: com.mysql.cj.jdbc.Driver
   #        password: root
